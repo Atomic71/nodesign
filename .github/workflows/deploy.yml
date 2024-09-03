@@ -1,5 +1,3 @@
-name: 🚀 Deploy website on push
-
 on:
   push:
     branches:
@@ -8,15 +6,27 @@ on:
 
 jobs:
   web-deploy:
-    name: 🎉 Deploy
+    name: 🚀 Deploy website on push
     runs-on: ubuntu-latest
     steps:
       - name: 🚚 Get latest code
         uses: actions/checkout@v4
 
-      - name: 📂 Sync files
+      - name: 🛠️ Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "20" # Adjust the Node.js version as needed
+
+      - name: 📦 Install dependencies
+        run: npm install
+
+      - name: 🏗️ Build the project
+        run: npm run build
+
+      - name: 📂 Sync build output
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: dist # Push only the build output
