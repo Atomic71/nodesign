@@ -36,7 +36,7 @@ import { SITE_TITLE } from '../consts';
 		</div>
 	</nav>
 	<!-- Mobilni meni koji se otvara preko celog ekrana -->
-<div class="mobile-menu fixed hidden"> <!-- Dodao sam klasu 'hidden' da bi meni bio sakriven po defaultu -->
+<div class="mobile-menu fixed hidden"> 
   <button class="menu-close absolute top-4 right-4" aria-label="Close menu">
     <span class="sr-only">Close menu</span>
     <svg width="40" height="40" viewBox="0 0 40 40">
@@ -150,13 +150,13 @@ a[data-astro-cid-eimmu3lg].active {
 /* Kada je meni otvoren */
 .mobile-menu.open {
     display: flex;
-    transform: translateY(0); /* Meni dolazi na svoje mesto */
+    transform: translateY(0); 
     opacity: 1;
 }
 
 /* Animacija za zatvaranje */
 .mobile-menu.closing {
-    transform: translateY(-100%); /* Meni se pomera nazad gore */
+    transform: translateY(-100%); 
     opacity: 0;
 }
 
@@ -213,7 +213,7 @@ a[data-astro-cid-eimmu3lg].active {
 	  if (menuToggle && menuClose && mobileMenu) {
 		menuToggle.addEventListener('click', () => {
 		  mobileMenu.classList.add('open');
-		  mobileMenu.classList.remove('closing'); // Ukloniti 'closing' ako je ranije bio dodan
+		  mobileMenu.classList.remove('closing'); 
 		});
   
 		menuClose.addEventListener('click', () => {
@@ -222,7 +222,7 @@ a[data-astro-cid-eimmu3lg].active {
 		  // Sačekaj animaciju pre nego što ukloniš klasu 'open'
 		  mobileMenu.addEventListener('transitionend', () => {
 		    mobileMenu.classList.remove('open');
-		  }, { once: true }); // `once: true` osigurava da se ovaj događaj pokrene samo jednom
+		  }, { once: true }); 
 		});
 	  }
 	});
@@ -243,8 +243,7 @@ a[data-astro-cid-eimmu3lg].active {
   // Klik na bilo koji link u meniju
   menuLinks.forEach(link => {
     link.addEventListener('click', function () {
-      closeMenu(); // Zatvori meni
-      // Stranica se prirodno osvežava kad klikneš na link, nema potrebe za dodatnim kodom
+      closeMenu(); 
     });
   });
 </script>

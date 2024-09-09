@@ -233,36 +233,29 @@ const postsNamjestajPoMjeri = await getCollection('blog', ({ data }) => data.cat
 				<h2>Kontaktirajte nas!</h2>
 				<p class="">EMAIL | TELEFON | ADRESA</p>
 				<form class="" id="contactForm" onsubmit="return submitForm(event)">
-				  <!-- Grupa za ime, prezime i telefon (dve kolone) -->
 				  <div class="form-row">
-					<!-- Polje za ime i prezime -->
 					<div class="form-group half-width">
 					  <input type="text" id="name" name="name" placeholder="Ime i prezime" required>
 					</div>
 			
-					<!-- Polje za telefon -->
 					<div class="form-group half-width">
 					  <input type="tel" id="phone" name="phone" placeholder="Telefon" required pattern="[0-9]{9,15}">
 					</div>
 				  </div>
 			
-				  <!-- Polje za email -->
 				  <div class="form-group">
 					<input type="email" id="email" name="email" placeholder="E-mail" required>
 				  </div>
 			
-				  <!-- Polje za poruku -->
 				  <div class="form-group">
 					<textarea id="message" name="message" rows="5" placeholder="Poruka" required></textarea>
 				  </div>
 			
-				  <!-- Dugme za slanje -->
 				  <div class="form-group">
 					<button type="submit" class="btn-submit custom-buttonlg">Pošalji</button>
 				  </div>
 				</form>
 			
-				<!-- Poruka o uspešnom slanju -->
 				<div id="successMessage" class="success-message" style="display:none;">
 				  Vaša poruka je uspešno dostavljena!
 				</div>
@@ -369,7 +362,7 @@ const postsNamjestajPoMjeri = await getCollection('blog', ({ data }) => data.cat
       document.getElementById("errorMessage").style.display = "block";
     }
 
-    return false; // Sprečava redirekciju
+    return false; 
   }
 		</script>
 	</body>

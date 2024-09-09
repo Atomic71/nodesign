@@ -141,13 +141,9 @@ hr {
 	height: 1px;
 	width: 1px;
 	overflow: hidden;
-	/* IE6, IE7 - a 0 height clip, off to the bottom right of the visible 1px box */
 	clip: rect(1px 1px 1px 1px);
-	/* maybe deprecated but we need to support legacy browsers */
 	clip: rect(1px, 1px, 1px, 1px);
-	/* modern browsers, clip-path works inwards from each corner */
 	clip-path: inset(50%);
-	/* added line to stop words getting smushed together (as they go onto separate lines and some screen readers do not understand line feeds as a space */
 	white-space: nowrap;
 }
 .grbg {
@@ -556,19 +552,19 @@ hr {
 	}
 	.aboutcont {
 		display: flex;
-		flex-direction: column; /* Stack items vertically */
-		justify-content: center; /* Vertically center the content */
-		align-items: center; /* Horizontally center the content */
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
 		text-align: center;
 		padding: 60px 0px;
 	}
 	
 	.aboutcont img {
-		margin-bottom: 20px; /* Add some spacing below the image */
+		margin-bottom: 20px;
 	}
 	
 	.aboutcont .txt {
-		max-width: 900px; /* Optional: Set a max width for the text to improve readability */
+		max-width: 900px; 
 		padding: 20px 0px 30px 0px;
 	}
 	
@@ -591,7 +587,7 @@ hr {
 		flex-direction: column;
 		align-items: center;
 		text-align: center;
-		width: 22%; /* Width for 4 columns */
+		width: 22%; 
 	}
 	
 	.icon-box h4 {
@@ -672,7 +668,7 @@ hr {
 	/* Responsive for tablets */
 	@media (max-width: 992px) {
 		.icon-box {
-			width: 50%; /* 2 columns for tablets */
+			width: 50%;
 			margin-bottom: 20px;
 		}
 	}
@@ -680,7 +676,7 @@ hr {
 	/* Responsive for mobile */
 	@media (max-width: 768px) {
 		.icon-box {
-			width: 50%; /* Still 2 columns on smaller tablets */
+			width: 50%; 
 			margin-bottom: 20px;
 		}
 	}
@@ -688,7 +684,7 @@ hr {
 	/* Responsive for small mobile screens */
 	@media (max-width: 480px) {
 		.icon-box {
-			width: 50%; /* 1 column for mobile */
+			width: 50%; 
 			margin-bottom: 20px;
 		}
 	}
@@ -731,13 +727,13 @@ hr {
 	width: 100%;
 }
 .colth-slider-item {
-	flex: 0 0 100%; /* Početni stil za bočne slajdove */
+	flex: 0 0 100%; 
 	padding: 0px;
 	box-sizing: border-box;
 }
 
 .colth-slider-item.middle-slide {
-	flex: 0 0 100%; /* Srednji slajd zauzima 50% */
+	flex: 0 0 100%; 
 }
 .odfirst {
 	order: 2;
