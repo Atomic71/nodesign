@@ -3,48 +3,367 @@ import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import { getCollection } from 'astro:content';
+
+// Dohvati postove za svaku kategoriju
+const postsUredjenjeDoma = await getCollection('blog', ({ data }) => data.category === 'Uređivanje doma');
+const postsUredjenjePoslovnihProstora = await getCollection('blog', ({ data }) => data.category === 'Uređivanje poslovnih prostora');
+const postsNamjestajPoMjeri = await getCollection('blog', ({ data }) => data.category === 'Namještaj po mjeri');
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="bs">
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 	</head>
 	<body>
 		<Header />
-		<main>
-			<h1>🧑‍🚀 Hello, Astronaut!</h1>
-			<p>
-				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This
-				template serves as a lightweight, minimally-styled starting point for anyone looking to build
-				a personal website, blog, or portfolio with Astro.
-			</p>
-			<p>
-				This template comes with a few integrations already configured in your
-				<code>astro.config.mjs</code> file. You can customize your setup with
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-				React, or Vue to your project.
-			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
-			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/content/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-			</ul>
-			<p>
-				Have fun! If you get stuck, remember to <a href="https://docs.astro.build/"
-					>read the docs
-				</a> or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
-			</p>
-			<p>
-				Looking for a blog template with a bit more personality? Check out <a
-					href="https://github.com/Charca/astro-blog-template"
-					>astro-blog-template
-				</a> by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
-			</p>
-		</main>
+
+		<!-- Sekcija za slider -->
+		<section><div class="slider-container">
+			<div class="slider">
+				<div class="slide active oneslide">
+					<div class="slidecont ">
+						<div class="container spacebtw">
+							<div class="w-4/5">
+								<h2 class="slidetitle">Custom-made</h2>
+								<p class="slidetext">Od ideje do realizacije, Vaš prostor je naša misija!</p>
+							</div>
+						
+							<div class="social-media w-1/5">
+								<a href="https://www.facebook.com" target="_blank" class="social-icon">
+									<img src="/images/facebook.svg" class="socico" alt="Facebook logo" loading="lazy">
+								</a>
+								<a href="https://www.instagram.com" target="_blank" class="social-icon">
+									<img src="/images/instagram.svg" class="socico" alt="Instagram logo" loading="lazy">
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="slide twoslide">
+					<div class="slidecont ">
+						<div class="container spacebtw">
+							<div class="w-4/5">
+								<h2 class="slidetitle">Custom-made</h2>
+								<p class="slidetext">Od ideje do realizacije, Vaš prostor je naša misija!</p>
+							</div>
+						
+							<div class="social-media w-1/5">
+								<a href="https://www.facebook.com" target="_blank" class="social-icon">
+									<img src="/images/facebook.svg" class="socico" alt="Facebook logo" loading="lazy">
+								</a>
+								<a href="https://www.instagram.com" target="_blank" class="social-icon">
+									<img src="/images/instagram.svg" class="socico" alt="Instagram logo" loading="lazy">
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="slide threeslide">
+					<div class="slidecont ">
+						<div class="container spacebtw">
+							<div class="w-4/5">
+								<h2 class="slidetitle">Custom-made</h2>
+								<p class="slidetext">Od ideje do realizacije, Vaš prostor je naša misija!</p>
+							</div>
+						
+							<div class="social-media w-1/5">
+								<a href="https://www.facebook.com" target="_blank" class="social-icon">
+									<img src="/images/facebook.svg" class="socico" alt="Facebook logo" loading="lazy">
+								</a>
+								<a href="https://www.instagram.com" target="_blank" class="social-icon">
+									<img src="/images/instagram.svg" class="socico" alt="Instagram logo" loading="lazy">
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<button class="slider-arrow slider-arrow-left">
+				<svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<path d="M15 19l-7-7 7-7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+				</svg>
+			</button>
+			<button class="slider-arrow slider-arrow-right">
+				<svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<path d="M9 5l7 7-7 7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+				</svg>
+			</button>
+		</div>
+	</section>
+
+		<!-- Sekcija o nama -->
+		<section class="aboutsection" id="o-nama">
+			<div class="container aboutcont">
+				<img class="aboutsimbol" src="/images/simbol.logo.svg" loading="lazy">
+				<p class="txt">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae ultricies leo integer malesuada nunc vel risus commodo viverra. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae ultricies leo integer malesuada nunc vel risus commodo viverra.</p>
+				<section class="icon-section">
+					<div class="icon-container">
+						<div class="icon-box">
+							<div class="icon">
+								<img class="abicon" src="/images/simbol.logo.svg" loading="lazy">
+							</div>
+							<h4>Benefit</h4>
+						</div>
+						<div class="icon-box">
+							<div class="icon">
+								<img class="abicon" src="/images/simbol.logo.svg" loading="lazy">
+							</div>
+							<h4>Benefit</h4>
+						</div>
+						<div class="icon-box">
+							<div class="icon">
+								<img class="abicon" src="/images/simbol.logo.svg" loading="lazy">
+							</div>
+							<h4>Benefit</h4>
+						</div>
+						<div class="icon-box">
+							<div class="icon">
+								<img class="abicon" src="/images/simbol.logo.svg" loading="lazy">
+							</div>
+							<h4>Benefit</h4>
+						</div>
+					</div>
+				</section>
+			</div>
+		</section>
+	
+		<!-- Sekcija za Uređivanje doma sa sliderom (70%) i dodatnim sadržajem (30%) -->
+		<section class="colth-blog-slider grbgl" id="projekti">
+			<div class="colth-container container">
+				<div class="colth-slider-container odfirst">
+					<div class="colth-slider-track">
+						{postsUredjenjeDoma.slice(0, 6).map((post, index) => (
+							<div class="colth-slider-item" key={index}>
+								<a href={`/blog/${post.slug}/`}>
+									<h3 class="colth-slider-title">{post.data.title}</h3>
+									<div class="colth-image-container">
+										<img src={post.data.heroImage} alt={post.data.title} loading="lazy"/>
+									</div>
+								</a>
+							</div>
+						))}
+					</div>
+					<button class="colth-slider-arrow colth-slider-arrow-left">
+						<svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path d="M15 19l-7-7 7-7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+						</svg>
+					</button>
+					<button class="colth-slider-arrow colth-slider-arrow-right">
+						<svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path d="M9 5l7 7-7 7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+						</svg>
+					</button>
+				</div>
+				<div class="colth-side-content tar odsecond">
+					<h3 class="colth-tit">Uređivanje doma</h3>
+					<p class="colth-text">Lorem ipsum dolor sit amet.</p>
+					<div>
+						<a href="#" class="custom-buttonlg">Započni opremanje prostora!</a>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Sekcija za Uređivanje poslovnog prostora -->
+		<section class="colth-blog-slider grbg pdb">
+			<div class="colth-container container">
+				<div class="colth-side-content tal ">
+					<h3 class="colth-tit">Uređivanje poslovnog prostora</h3>
+					<p class="colth-text">Lorem ipsum dolor sit amet.</p>
+					<div>
+						<a href="#" class="custom-buttonlg">Započni opremanje prostora!</a>
+					</div>
+				</div>
+				<div class="colth-slider-container ">
+					<div class="colth-slider-track">
+						{postsUredjenjePoslovnihProstora.slice(0, 6).map((post, index) => (
+							<div class="colth-slider-item" key={index}>
+								<a href={`/blog/${post.slug}/`}>
+									<h3 class="colth-slider-title">{post.data.title}</h3>
+									<div class="colth-image-container">
+										<img src={post.data.heroImage} alt={post.data.title} loading="lazy"/>
+									</div>
+								</a>
+							</div>
+						))}
+					</div>
+					<button class="colth-slider-arrow colth-slider-arrow-left">
+						<svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path d="M15 19l-7-7 7-7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+						</svg>
+					</button>
+					<button class="colth-slider-arrow colth-slider-arrow-right">
+						<svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path d="M9 5l7 7-7 7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+						</svg>
+					</button>
+				</div>
+			</div>
+		</section>
+
+		<!-- Sekcija za Namještaj po mjeri -->
+		<section class="black-sec">
+			<div class="container">
+				<ul class="blog-grid">
+					{postsNamjestajPoMjeri.slice(0, 3).map((post, index) => (
+						<li class={index === 1 ? 'middle-box' : 'side-box'}>
+							<a href={`/blog/${post.slug}/`}>
+								<div class="image-container">
+									<img src={post.data.heroImage} alt={post.data.title} loading="lazy"/>
+									<h3 class="image-title">{post.data.title}</h3>
+								</div>
+							</a>
+						</li>
+					))}
+				</ul>
+				<h2 class="titnpm">Namještaj po mjeri</h2>
+				<p class="txtnpm">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+				<p class="txttopbtn">
+					<a href="#" class="">pogledaj galeriju naših projekata</a> ili 
+				</p>
+				<a href="#" class="custom-button">Započni opremanje prostora!</a>
+			</div>
+		</section>
+
+		<!-- Sekcija kontakt -->
+		<section class="aboutsection" id="kontakt">
+			<div class="container aboutcont">
+				<h2>Kontaktirajte nas!</h2>
+				<p class="">EMAIL | TELEFON | ADRESA</p>
+				<form class="" id="contactForm" onsubmit="return submitForm(event)">
+				  <div class="form-row">
+					<div class="form-group half-width">
+					  <input type="text" id="name" name="name" placeholder="Ime i prezime" required>
+					</div>
+			
+					<div class="form-group half-width">
+					  <input type="tel" id="phone" name="phone" placeholder="Telefon" required pattern="[0-9]{9,15}">
+					</div>
+				  </div>
+			
+				  <div class="form-group">
+					<input type="email" id="email" name="email" placeholder="E-mail" required>
+				  </div>
+			
+				  <div class="form-group">
+					<textarea id="message" name="message" rows="5" placeholder="Poruka" required></textarea>
+				  </div>
+			
+				  <div class="form-group">
+					<button type="submit" class="btn-submit custom-buttonlg">Pošalji</button>
+				  </div>
+				</form>
+			
+				<div id="successMessage" class="success-message" style="display:none;">
+				  Vaša poruka je uspešno dostavljena!
+				</div>
+			  </div>
+		</section>
 		<Footer />
+
+		<script>
+			const prevArrow = document.querySelector('.slider-arrow-left');
+			const nextArrow = document.querySelector('.slider-arrow-right');
+			const slider = document.querySelector('.slider');
+			const slides = document.querySelectorAll('.slide');
+			let index = 0;
+
+			function showSlide(n) {
+				const totalSlides = slides.length;
+				if (n >= totalSlides) {
+					index = 0;
+				} else if (n < 0) {
+					index = totalSlides - 1;
+				} else {
+					index = n;
+				}
+				slider.style.transform = `translateX(-${index * 100}vw)`;
+				slides.forEach((slide, i) => {
+					slide.classList.toggle('active', i === index);
+				});
+			}
+
+			prevArrow.addEventListener('click', () => showSlide(index - 1));
+			nextArrow.addEventListener('click', () => showSlide(index + 1));
+
+			setInterval(() => showSlide(index + 1), 10000);
+
+			const colthSliderTrack = document.querySelector('.colth-slider-track');
+			const colthSlides = Array.from(document.querySelectorAll('.colth-slider-item'));
+			const colthPrevArrow = document.querySelector('.colth-slider-arrow-left');
+			const colthNextArrow = document.querySelector('.colth-slider-arrow-right');
+
+			let colthIndex = 0;
+			let visibleSlides = 3;
+			let slideWidth = colthSlides[0].clientWidth;
+			const totalSlides = colthSlides.length;
+
+			function showColthSlide(n) {
+				if (n < 0) {
+					colthIndex = 0;
+				} else if (n >= totalSlides - visibleSlides) {
+					colthIndex = totalSlides - visibleSlides;
+				} else {
+					colthIndex = n;
+				}
+
+				const offset = colthIndex * slideWidth;
+				colthSliderTrack.style.transition = 'transform 0.5s ease';
+				colthSliderTrack.style.transform = `translateX(-${offset}px)`;
+
+				updateArrowVisibility();
+			}
+
+			function updateArrowVisibility() {
+				colthPrevArrow.style.display = colthIndex === 0 ? 'none' : 'block';
+				colthNextArrow.style.display = colthIndex >= totalSlides - visibleSlides ? 'none' : 'block';
+			}
+
+			colthNextArrow.addEventListener('click', () => {
+				if (colthIndex < totalSlides - visibleSlides) {
+					showColthSlide(colthIndex + 1);
+				}
+			});
+
+			colthPrevArrow.addEventListener('click', () => {
+				if (colthIndex > 0) {
+					showColthSlide(colthIndex - 1);
+				}
+			});
+
+			window.addEventListener('resize', () => {
+				slideWidth = colthSlides[0].clientWidth;
+				const offset = colthIndex * slideWidth;
+				colthSliderTrack.style.transition = 'none';
+				colthSliderTrack.style.transform = `translateX(-${offset}px)`;
+			});
+
+			showColthSlide(colthIndex);
+			updateArrowVisibility();
+
+			function submitForm(event) {
+    event.preventDefault(); // Sprečava osvežavanje stranice
+
+    // Resetuj poruke
+    document.getElementById("successMessage").style.display = "none";
+    document.getElementById("errorMessage").style.display = "none";
+
+    // Simulacija slanja forme (možete ovde dodati vašu logiku slanja na server)
+    const isSuccess = Math.random() > 0.5; // Simulacija uspeha ili neuspeha slanja
+
+    if (isSuccess) {
+      // Uspešno slanje
+      document.getElementById("successMessage").style.display = "block";
+      document.getElementById("contactForm").reset(); // Resetovanje forme
+    } else {
+      // Neuspešno slanje
+      document.getElementById("errorMessage").style.display = "block";
+    }
+
+    return false; 
+  }
+		</script>
 	</body>
 </html>
