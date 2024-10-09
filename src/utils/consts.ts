@@ -1,2 +1,2 @@
-export const SITE_TITLE = 'NO DESIGN';
-export const SITE_DESCRIPTION = 'MOJ OPIS';
+export const SITE_TITLE = 'NoDesign';
+export const SITE_DESCRIPTION = 'Vrhunski dizajn i izrada namještaja';
