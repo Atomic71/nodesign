@@ -1,0 +1,41 @@
+---
+import Section from '../Section.astro';
+import Text from '../Text.astro';
+
+interface Testimonial {
+  content: string;
+  author: string;
+}
+
+interface Props {
+  title: string;
+  testimonials: Testimonial[];
+}
+
+const { title, testimonials } = Astro.props;
+---
+
+<Section title={title}>
+  <div class='grid md:grid-cols-2 gap-8'>
+    {
+      testimonials.map((testimonial) => (
+        <div class='bg-white p-6 rounded-lg shadow-md'>
+          <Text
+            level='body'
+            color='dark'
+            class='italic mb-4'
+          >
+            "{testimonial.content}"
+          </Text>
+          <Text
+            level='small'
+            color='primary'
+            class='font-semibold'
+          >
+            - {testimonial.author}
+          </Text>
+        </div>
+      ))
+    }
+  </div>
+</Section>

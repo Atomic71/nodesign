@@ -1,0 +1,62 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Section from '../../components/Section.astro';
+import Thumbnail from '../../components/Thumbnail.astro';
+import { getCategories } from '../../utils/images';
+import { getContent } from '../../utils/contentLoader';
+import type { CategoryInfo } from '../../utils/images';
+import Text from '../../components/Text.astro';
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+  const categories = await getCategories();
+
+  return categories.map((category) => ({
+    params: { category: category.slug },
+    props: { category },
+  }));
+}
+
+const { category } = Astro.props;
+
+const categoryContent = await getContent('categories');
+if (!categoryContent) {
+  return Astro.redirect('/404');
+}
+const { frontmatter } = categoryContent;
+
+const categoryTitle =
+  frontmatter.categories[category.slug]?.title || category.name;
+const categoryDescription =
+  frontmatter.categories[category.slug]?.description || '';
+---
+
+<Layout title={`${categoryTitle} | NoDesign`}>
+  <Section title={categoryTitle}>
+    {
+      categoryDescription && (
+        <Text
+          level='body'
+          color='dark'
+          class='mb-8'
+        >
+          {categoryDescription}
+        </Text>
+      )
+    }
+
+    <div class='grid md:grid-cols-2 lg:grid-cols-3 gap-8'>
+      {
+        category.projects.map((project) => (
+          <Thumbnail
+            image={project.coverImage}
+            title={project.name}
+            description={project.description}
+            link={`/galerija/${category.slug}/${project.slug}`}
+          />
+        ))
+      }
+    </div>
+  </Section>
+</Layout>

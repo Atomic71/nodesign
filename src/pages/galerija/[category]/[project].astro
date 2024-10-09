@@ -1,0 +1,103 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Section from '../../../components/Section.astro';
+import Text from '../../../components/Text.astro';
+import { getCategories } from '../../../utils/images';
+import { getContent } from '../../../utils/contentLoader';
+import type { CategoryInfo, ProjectInfo } from '../../../utils/images';
+import 'photoswipe/style.css';
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+  const categories = await getCategories();
+
+  return categories.flatMap((category) =>
+    category.projects.map((project) => ({
+      params: { category: category.slug, project: project.slug },
+      props: { category, project },
+    }))
+  );
+}
+
+interface Props {
+  category: CategoryInfo;
+  project: ProjectInfo;
+}
+
+const { category, project } = Astro.props;
+
+const projectContent = await getContent('projects');
+if (!projectContent) {
+  return Astro.redirect('/404');
+}
+const { frontmatter } = projectContent;
+---
+
+<Layout title={`${project.name} | ${category.name} | NoDesign`}>
+  <Section>
+    <nav class='mb-8'>
+      <a
+        href={`/galerija/${category.slug}`}
+        class='text-gray-600 hover:text-gray-900'
+      >
+        ← {frontmatter.backToCategory}
+      </a>
+    </nav>
+
+    <Text
+      level='h1'
+      color='primary'
+      >{project.name}</Text
+    >
+    {
+      project.description && (
+        <Text
+          level='body'
+          color='dark'
+          class='mt-4 mb-8'
+        >
+          {project.description}
+        </Text>
+      )
+    }
+
+    <div
+      class='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pswp-gallery'
+      id='gallery'
+    >
+      {
+        project.images.map((image, index) => (
+          <a
+            href={image.src}
+            data-pswp-width={image.width}
+            data-pswp-height={image.height}
+            class='group relative overflow-hidden rounded-lg aspect-square cursor-pointer'
+          >
+            <img
+              src={image.thumbnail}
+              alt={image.alt}
+              class='object-cover w-full h-full transition-transform duration-300 group-hover:scale-105'
+              loading='lazy'
+            />
+            <div class='absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center'>
+              <span class='text-white text-lg font-semibold'>{image.alt}</span>
+            </div>
+          </a>
+        ))
+      }
+    </div>
+  </Section>
+</Layout>
+
+<script>
+  import PhotoSwipeLightbox from 'photoswipe/lightbox';
+  import 'photoswipe/style.css';
+
+  const lightbox = new PhotoSwipeLightbox({
+    gallery: '#gallery',
+    children: 'a',
+    pswpModule: () => import('photoswipe'),
+  });
+  lightbox.init();
+</script>

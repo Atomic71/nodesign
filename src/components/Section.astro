@@ -1,0 +1,36 @@
+---
+import Text from './Text.astro';
+
+interface Props {
+  title?: string;
+  titleLevel?: 'h1' | 'h2' | 'h3';
+  titleColor?: 'primary' | 'secondary' | 'accent' | 'light' | 'dark';
+  backgroundColor?: string;
+  class?: string;
+}
+
+const {
+  title,
+  titleLevel = 'h2',
+  titleColor = 'primary',
+  backgroundColor = 'bg-white',
+  class: className,
+} = Astro.props;
+---
+
+<section class:list={[backgroundColor, 'py-16', className]}>
+  <div class='container mx-auto px-4'>
+    {
+      title && (
+        <Text
+          level={titleLevel}
+          color={titleColor}
+          class='mb-8 text-center'
+        >
+          {title}
+        </Text>
+      )
+    }
+    <slot />
+  </div>
+</section>

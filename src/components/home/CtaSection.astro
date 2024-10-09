@@ -1,0 +1,35 @@
+---
+import Section from '../Section.astro';
+import Text from '../Text.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  buttonText: string;
+  link: string;
+}
+
+const { title, description, buttonText, link } = Astro.props;
+---
+
+<Section
+  title={title}
+  backgroundColor='bg-primary'
+  titleColor='light'
+>
+  <Text
+    level='body'
+    color='light'
+    class='text-center mb-8'
+  >
+    {description}
+  </Text>
+  <div class='flex justify-center'>
+    <a
+      href={link}
+      class='bg-white hover:bg-neutral-100 text-primary font-bold py-2 px-4 rounded transition duration-300'
+    >
+      {buttonText}
+    </a>
+  </div>
+</Section>

@@ -1,0 +1,52 @@
+---
+import Text from './Text.astro';
+
+interface ListItem {
+  text: string;
+  link?: string;
+}
+
+interface Props {
+  title: string;
+  items: ListItem[];
+}
+
+const { title, items } = Astro.props;
+---
+
+<div>
+  <Text
+    level='h3'
+    color='light'
+    class='mb-4'
+    >{title}</Text
+  >
+  <ul class='space-y-2'>
+    {
+      items.map((item) => (
+        <li>
+          {item.link ? (
+            <a
+              href={item.link}
+              class='text-neutral-300 hover:text-white'
+            >
+              <Text
+                level='small'
+                color='light'
+              >
+                {item.text}
+              </Text>
+            </a>
+          ) : (
+            <Text
+              level='small'
+              color='light'
+            >
+              {item.text}
+            </Text>
+          )}
+        </li>
+      ))
+    }
+  </ul>
+</div>

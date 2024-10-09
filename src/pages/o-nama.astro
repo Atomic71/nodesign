@@ -1,0 +1,42 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Section from '../components/Section.astro';
+import Text from '../components/Text.astro';
+import { getContent } from '../utils/contentLoader';
+
+const aboutContent = await getContent('o-nama');
+console.log(aboutContent);
+if (!aboutContent) {
+  return Astro.redirect('/404');
+}
+const { frontmatter, content } = aboutContent;
+---
+
+<Layout title={frontmatter.title}>
+  <Section title={frontmatter.title}>
+    <Text
+      level='body'
+      color='dark'
+      set:html={content}
+    />
+  </Section>
+
+  <Section
+    title={frontmatter.mission.title}
+    backgroundColor='bg-neutral-100'
+  >
+    <Text
+      level='body'
+      color='dark'
+      >{frontmatter.mission.content}</Text
+    >
+  </Section>
+
+  <Section title={frontmatter.team.title}>
+    <Text
+      level='body'
+      color='dark'
+      >{frontmatter.team.content}</Text
+    >
+  </Section>
+</Layout>

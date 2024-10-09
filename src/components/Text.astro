@@ -1,0 +1,41 @@
+---
+export interface Props {
+  level: 'h1' | 'h2' | 'h3' | 'body' | 'small';
+  color?: 'primary' | 'secondary' | 'accent' | 'light' | 'dark';
+  class?: string;
+}
+
+const { level, color, class: className } = Astro.props;
+
+const tagMap = {
+  h1: 'h1',
+  h2: 'h2',
+  h3: 'h3',
+  body: 'p',
+  small: 'p',
+};
+
+const sizeMap = {
+  h1: 'text-4xl md:text-5xl font-bold font-display',
+  h2: 'text-3xl md:text-4xl font-semibold font-display',
+  h3: 'text-2xl md:text-3xl font-medium font-display',
+  body: 'text-base md:text-lg',
+  small: 'text-sm md:text-base',
+};
+
+const colorMap = {
+  primary: 'text-primary-dark dark:text-primary-light',
+  secondary: 'text-secondary dark:text-secondary-light',
+  accent: 'text-accent dark:text-accent-light',
+  light: 'text-neutral-100 dark:text-neutral-200',
+  dark: 'text-neutral-900 dark:text-neutral-100',
+};
+
+const Tag = tagMap[level];
+const sizeClass = sizeMap[level];
+const colorClass = color ? colorMap[color] : '';
+---
+
+<Tag class:list={[sizeClass, colorClass, className]}>
+  <slot />
+</Tag>

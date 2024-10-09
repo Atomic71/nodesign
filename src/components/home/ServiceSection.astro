@@ -1,0 +1,32 @@
+---
+import type { CategoryInfo } from '../../utils/images';
+import Section from '../Section.astro';
+import Thumbnail from '../Thumbnail.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  categories: CategoryInfo[];
+}
+
+const { title, description, categories } = Astro.props;
+---
+
+<Section
+  title={title}
+  backgroundColor='bg-neutral-100'
+>
+  <p class='text-center mb-8'>{description}</p>
+  <div class='grid md:grid-cols-3 gap-8'>
+    {
+      categories.map((category) => (
+        <Thumbnail
+          image={category.projects[0]?.coverImage || '/api/placeholder/600/400'}
+          title={category.name}
+          description={category.description}
+          link={`/galerija/${category.slug}`}
+        />
+      ))
+    }
+  </div>
+</Section>

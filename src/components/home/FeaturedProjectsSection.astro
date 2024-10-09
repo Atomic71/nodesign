@@ -1,0 +1,38 @@
+---
+import type { ProjectInfo } from '../../utils/images';
+import Section from '../Section.astro';
+import Thumbnail from '../Thumbnail.astro';
+
+interface FeaturedProject {
+  category: string;
+  categorySlug: string;
+  project: ProjectInfo;
+}
+
+interface Props {
+  title: string;
+  description: string;
+  featuredProjects: FeaturedProject[];
+}
+
+const { title, description, featuredProjects } = Astro.props;
+---
+
+<Section
+  title={title}
+  titleColor='secondary'
+>
+  <p class='text-center mb-8'>{description}</p>
+  <div class='grid md:grid-cols-3 gap-8'>
+    {
+      featuredProjects.map(({ category, categorySlug, project }) => (
+        <Thumbnail
+          image={project.coverImage}
+          title={project.name}
+          description={category}
+          link={`/galerija/${categorySlug}/${project.slug}`}
+        />
+      ))
+    }
+  </div>
+</Section>

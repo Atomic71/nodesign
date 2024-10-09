@@ -1,0 +1,52 @@
+---
+import Text from './Text.astro';
+
+interface Props {
+  title: string;
+  subtitle?: string;
+  backgroundImage: string;
+  ctaText?: string;
+  ctaLink?: string;
+}
+
+const { title, subtitle, backgroundImage, ctaText, ctaLink } = Astro.props;
+---
+
+<section class='relative h-[70vh] flex items-center justify-center'>
+  <div class='absolute inset-0 bg-black bg-opacity-50 z-10'></div>
+  <img
+    src={backgroundImage}
+    alt='Hero background'
+    class='absolute inset-0 w-full h-full object-cover'
+  />
+  <div class='relative z-20 text-center text-white px-4'>
+    <Text
+      level='h1'
+      color='light'
+      class='mb-4'
+    >
+      {title}
+    </Text>
+    {
+      subtitle && (
+        <Text
+          level='body'
+          color='light'
+          class='mb-8 max-w-2xl mx-auto'
+        >
+          {subtitle}
+        </Text>
+      )
+    }
+    {
+      ctaText && ctaLink && (
+        <a
+          href={ctaLink}
+          class='bg-primary hover:bg-primary-dark text-white px-8 py-3 rounded-lg text-lg transition-all inline-block'
+        >
+          {ctaText}
+        </a>
+      )
+    }
+  </div>
+</section>

@@ -1,0 +1,33 @@
+---
+import Section from '../Section.astro';
+import Text from '../Text.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  cta: string;
+}
+
+const { title, description, cta } = Astro.props;
+---
+
+<Section
+  title={title}
+  backgroundColor='bg-neutral-100'
+>
+  <Text
+    level='body'
+    color='dark'
+    class='text-center mb-8'
+  >
+    {description}
+  </Text>
+  <div class='flex justify-center'>
+    <a
+      href='/o-nama'
+      class='bg-primary hover:bg-primary-dark text-white font-bold py-2 px-4 rounded transition duration-300'
+    >
+      {cta}
+    </a>
+  </div>
+</Section>
