@@ -1,8 +1,5 @@
 ---
-// import LanguageToggle from './LanguageToggle.astro';
-// import { type Language } from '@utils/config';
-
-// const { lang } = Astro.params as { lang: Language };
+import NavLink from '@components/common/NavLink.astro';
 ---
 
 <header class='bg-white shadow-sm sticky top-0 z-50'>
@@ -13,39 +10,82 @@
         class='text-2xl font-display font-bold text-nodesign-primary'
         >NoDesign</a
       >
+
+      <!-- Desktop Navigation -->
       <div class='hidden md:flex space-x-8 items-center'>
-        <a
-          href={`/o-nama`}
-          class='text-gray-600 hover:text-nodesign-accent transition-colors'
-          >O nama</a
-        >
-        <a
-          href={`/galerija`}
-          class='text-gray-600 hover:text-nodesign-accent transition-colors'
-          >Galerija</a
-        >
-        <a
-          href={`/kontakt`}
-          class='text-gray-600 hover:text-nodesign-accent transition-colors'
-          >Kontakt</a
-        >
+        <NavLink href={`/o-nama`}>O nama</NavLink>
+        <NavLink href={`/kontakt`}>Kontakt</NavLink>
       </div>
-      <button class='md:hidden'>
-        <svg
-          xmlns='http://www.w3.org/2000/svg'
-          class='h-6 w-6'
-          fill='none'
-          viewBox='0 0 24 24'
-          stroke='currentColor'
+
+      <!-- Mobile Navigation -->
+      <div class='md:hidden'>
+        <button
+          id='menu-toggle'
+          class='text-gray-500 w-10 h-10 relative focus:outline-none bg-white'
+          aria-label='Toggle menu'
         >
-          <path
-            stroke-linecap='round'
-            stroke-linejoin='round'
-            stroke-width='2'
-            d='M4 6h16M4 12h16M4 18h16'
-          ></path>
-        </svg>
-      </button>
+          <div
+            class='block w-5 absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2'
+          >
+            <span
+              aria-hidden='true'
+              class='block absolute h-0.5 w-5 bg-current transform transition duration-500 ease-in-out'
+              style='margin-top: -0.25rem;'
+            ></span>
+            <span
+              aria-hidden='true'
+              class='block absolute h-0.5 w-5 bg-current transform transition duration-500 ease-in-out'
+            ></span>
+            <span
+              aria-hidden='true'
+              class='block absolute h-0.5 w-5 bg-current transform transition duration-500 ease-in-out'
+              style='margin-top: 0.25rem;'
+            ></span>
+          </div>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div
+      class='md:hidden mt-4 hidden'
+      id='mobile-menu'
+    >
+      <NavLink
+        href={`/o-nama`}
+        class='block py-2'
+        >O nama</NavLink
+      >
+      <NavLink
+        href={`/kontakt`}
+        class='block py-2'
+        >Kontakt</NavLink
+      >
     </div>
   </nav>
 </header>
+
+<style>
+  #menu-toggle[aria-expanded='true'] span:first-child {
+    transform: translateY(0.25rem) rotate(45deg);
+    margin-top: 0;
+  }
+  #menu-toggle[aria-expanded='true'] span:nth-child(2) {
+    opacity: 0;
+  }
+  #menu-toggle[aria-expanded='true'] span:last-child {
+    transform: translateY(-0.25rem) rotate(-45deg);
+    margin-top: 0;
+  }
+</style>
+
+<script>
+  const menuToggle = document.getElementById('menu-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  menuToggle?.addEventListener('click', () => {
+    const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
+    menuToggle.setAttribute('aria-expanded', String(!isExpanded));
+    mobileMenu?.classList.toggle('hidden');
+  });
+</script>
