@@ -1,22 +1,17 @@
 ---
-import { languages, defaultLanguage, type Language } from '@utils/config';
 import { SITE_TITLE, SITE_DESCRIPTION } from '@utils/consts';
-import { getContent } from '@utils/contentLoader';
 
-// Determine the current language and path
-const currentPath = Astro.url.pathname;
-const langFromUrl = currentPath.split('/')[1] as Language;
-const lang = languages.includes(langFromUrl) ? langFromUrl : defaultLanguage;
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+}
 
-console.log(`Current language: ${lang}`);
-console.log(`Current path: ${currentPath}`);
-// Load content based on the current path
-const pageContent = await getContent(currentPath);
-
-// Use frontmatter if available, otherwise fall back to default props
-const title = pageContent?.frontmatter.title || SITE_TITLE;
-const description = pageContent?.frontmatter.description || SITE_DESCRIPTION;
-const image = pageContent?.frontmatter.image || '/default-og-image.jpg';
+const {
+  title = SITE_TITLE,
+  description = SITE_DESCRIPTION,
+  image = '/default-og-image.jpg',
+} = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
@@ -93,30 +88,6 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 <meta
   property='twitter:image'
   content={new URL(image, Astro.url)}
-/>
-
-<!-- Alternate language versions -->
-{
-  languages.map((l) => (
-    <link
-      rel='alternate'
-      hreflang={l}
-      href={
-        new URL(
-          `/${l}${Astro.url.pathname.replace(/^\/[^\/]+/, '')}`,
-          Astro.site
-        )
-      }
-    />
-  ))
-}
-<link
-  rel='alternate'
-  hreflang='x-default'
-  href={new URL(
-    `/${defaultLanguage}${Astro.url.pathname.replace(/^\/[^\/]+/, '')}`,
-    Astro.site
-  )}
 />
 
 <!-- Add your custom fonts here -->
