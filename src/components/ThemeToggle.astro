@@ -36,6 +36,11 @@
   const themeToggleLightIcon = document.getElementById(
     'theme-toggle-light-icon'
   );
+  const themeToggleBtn = document.getElementById('theme-toggle');
+
+  if (!themeToggleDarkIcon || !themeToggleLightIcon || !themeToggleBtn) {
+    throw new Error('Theme toggle icons not found');
+  }
 
   // Change the icons inside the button based on previous settings
   if (
@@ -47,8 +52,6 @@
   } else {
     themeToggleDarkIcon.classList.remove('hidden');
   }
-
-  const themeToggleBtn = document.getElementById('theme-toggle');
 
   themeToggleBtn.addEventListener('click', function () {
     // toggle icons inside button
