@@ -1,6 +1,7 @@
 ---
 import MobileMenuToggle from '@components/MobileMenuToggle.astro';
 import MobileMenu from '@components/MobileMenu.astro';
+import Icon from './common/Icon.astro';
 ---
 
 <header
@@ -12,8 +13,13 @@ import MobileMenu from '@components/MobileMenu.astro';
       <a
         href={`/`}
         class='text-2xl font-display font-bold text-nodesign-primary'
-        >NoDesign</a
       >
+        <Icon
+          name='nodesign-brand-light'
+          width={200}
+          class='text-current'
+        />
+      </a>
 
       <!-- Desktop Navigation -->
       <div class='hidden md:flex space-x-8 items-center'>

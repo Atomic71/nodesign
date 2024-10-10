@@ -1,0 +1,29 @@
+---
+export interface Props {
+  name:
+    | 'nodesign-brand-light'
+    | 'nodesign-brand-dark'
+    | 'social-facebook'
+    | 'social-instagram';
+  class?: string;
+  width?: number;
+  height?: number;
+}
+
+const { name, class: className, width = 24, height = 24 } = Astro.props;
+
+const icons = {
+  'nodesign-brand-light': '/icons/nodesign-brand-white.svg',
+  'nodesign-brand-dark': '/icons/nodesign-brand-black.svg',
+  'social-instagram': '/icons/social-instagram.svg',
+  'social-facebook': '/icons/social-facebook.svg',
+};
+---
+
+<img
+  src={icons[name]}
+  alt={name.replace(/-/g, ' ')}
+  class={className}
+  width={width}
+  height={height}
+/>
