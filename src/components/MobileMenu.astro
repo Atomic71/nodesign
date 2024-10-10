@@ -1,0 +1,58 @@
+---
+import NavLink from './common/NavLink.astro';
+
+const menuItems = [
+  { href: '/o-nama', text: 'O nama' },
+  { href: '/kontakt', text: 'Kontakt' },
+];
+
+const socialLinks = [
+  { href: 'https://facebook.com', text: 'Facebook' },
+  { href: 'https://instagram.com', text: 'Instagram' },
+  { href: 'https://linkedin.com', text: 'LinkedIn' },
+];
+---
+
+<div
+  id='mobile-menu'
+  class='fixed inset-0 bg-white z-40 hidden'
+>
+  <div class='flex flex-col h-full justify-between py-20 px-8'>
+    <nav class='flex-grow flex items-center justify-center'>
+      <ul class='text-center'>
+        {
+          menuItems.map((item) => (
+            <li class='mb-8'>
+              <a
+                href={item.href}
+                class={'text-3xl transition-colors'}
+              >
+                {item.text}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+    <div class='text-center'>
+      {
+        socialLinks.map((link) => (
+          <a
+            href={link.href}
+            class=' mx-4 hover:text-nodesign-accent transition-colors'
+            target='_blank'
+            rel='noopener noreferrer'
+          >
+            {link.text}
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</div>
+
+<style>
+  body.menu-open {
+    overflow: hidden;
+  }
+</style>

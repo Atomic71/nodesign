@@ -1,8 +1,12 @@
 ---
-import NavLink from '@components/common/NavLink.astro';
+import MobileMenuToggle from '@components/MobileMenuToggle.astro';
+import MobileMenu from '@components/MobileMenu.astro';
 ---
 
-<header class='bg-white shadow-sm sticky top-0 z-50'>
+<header
+  class='fixed top-0 left-0 right-0 z-50 transition-all duration-300'
+  id='main-header'
+>
   <nav class='container mx-auto px-4 py-4'>
     <div class='flex justify-between items-center'>
       <a
@@ -13,79 +17,63 @@ import NavLink from '@components/common/NavLink.astro';
 
       <!-- Desktop Navigation -->
       <div class='hidden md:flex space-x-8 items-center'>
-        <NavLink href={`/o-nama`}>O nama</NavLink>
-        <NavLink href={`/kontakt`}>Kontakt</NavLink>
-      </div>
-
-      <!-- Mobile Navigation -->
-      <div class='md:hidden'>
-        <button
-          id='menu-toggle'
-          class='text-gray-500 w-10 h-10 relative focus:outline-none bg-white'
-          aria-label='Toggle menu'
+        <a
+          href={`/o-nama`}
+          class='text-gray-300 hover:text-gray-500'
+          >O nama</a
         >
-          <div
-            class='block w-5 absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2'
-          >
-            <span
-              aria-hidden='true'
-              class='block absolute h-0.5 w-5 bg-current transform transition duration-500 ease-in-out'
-              style='margin-top: -0.25rem;'
-            ></span>
-            <span
-              aria-hidden='true'
-              class='block absolute h-0.5 w-5 bg-current transform transition duration-500 ease-in-out'
-            ></span>
-            <span
-              aria-hidden='true'
-              class='block absolute h-0.5 w-5 bg-current transform transition duration-500 ease-in-out'
-              style='margin-top: 0.25rem;'
-            ></span>
-          </div>
-        </button>
+        <a
+          href={`/kontakt`}
+          class='text-gray-300 hover:text-gray-500'
+          >Kontakt</a
+        >
       </div>
-    </div>
 
-    <!-- Mobile Menu -->
-    <div
-      class='md:hidden mt-4 hidden'
-      id='mobile-menu'
-    >
-      <NavLink
-        href={`/o-nama`}
-        class='block py-2'
-        >O nama</NavLink
-      >
-      <NavLink
-        href={`/kontakt`}
-        class='block py-2'
-        >Kontakt</NavLink
-      >
+      <!-- Mobile Navigation Toggle -->
+      <div class='md:hidden'>
+        <MobileMenuToggle />
+      </div>
     </div>
   </nav>
 </header>
 
+<MobileMenu />
+
 <style>
-  #menu-toggle[aria-expanded='true'] span:first-child {
-    transform: translateY(0.25rem) rotate(45deg);
-    margin-top: 0;
+  #main-header {
+    transition:
+      background-color 0.3s ease,
+      box-shadow 0.3s ease;
   }
-  #menu-toggle[aria-expanded='true'] span:nth-child(2) {
-    opacity: 0;
+
+  #main-header.scrolled {
+    @apply bg-white shadow-md;
   }
-  #menu-toggle[aria-expanded='true'] span:last-child {
-    transform: translateY(-0.25rem) rotate(-45deg);
-    margin-top: 0;
+
+  #main-header.scrolled .text-nodesign-primary,
+  #main-header.scrolled .text-gray-500 {
+    @apply text-gray-800;
+  }
+
+  #main-header:not(.scrolled) .text-nodesign-primary,
+  #main-header:not(.scrolled) .text-gray-500 {
+    @apply text-white;
   }
 </style>
 
 <script>
-  const menuToggle = document.getElementById('menu-toggle');
-  const mobileMenu = document.getElementById('mobile-menu');
+  const header = document.getElementById('main-header');
 
-  menuToggle?.addEventListener('click', () => {
-    const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
-    menuToggle.setAttribute('aria-expanded', String(!isExpanded));
-    mobileMenu?.classList.toggle('hidden');
-  });
+  const scrollThreshold = 50;
+
+  function updateHeaderBackground() {
+    if (window.scrollY > scrollThreshold) {
+      header?.classList.add('scrolled');
+    } else {
+      header?.classList.remove('scrolled');
+    }
+  }
+
+  window.addEventListener('scroll', updateHeaderBackground);
+  updateHeaderBackground();
 </script>
