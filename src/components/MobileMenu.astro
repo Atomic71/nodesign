@@ -1,5 +1,6 @@
 ---
 import Icon from './common/Icon.astro';
+import ThemeToggle from './ThemeToggle.astro';
 
 const menuItems = [
   { href: '/o-nama', text: 'O nama' },
@@ -22,7 +23,7 @@ const socialLinks = [
 
 <div
   id='mobile-menu'
-  class='fixed inset-0 bg-white z-40 hidden'
+  class='fixed inset-0 bg-background-light dark:bg-background-dark z-40 hidden'
 >
   <div class='flex flex-col h-full justify-between py-20 px-8'>
     <nav class='flex-grow flex items-center justify-center'>
@@ -32,7 +33,7 @@ const socialLinks = [
             <li class='mb-8'>
               <a
                 href={item.href}
-                class='text-3xl transition-colors'
+                class='text-3xl text-text-dark dark:text-text-light transition-colors'
               >
                 {item.text}
               </a>
@@ -41,22 +42,27 @@ const socialLinks = [
         }
       </ul>
     </nav>
-    {
-      socialLinks.map((link) => (
-        <a
-          href={link.url}
-          class='text-black hover:text-primary transition-colors'
-          target='_blank'
-          rel='noopener noreferrer'
-        >
-          <Icon
-            name={link.icon}
-            width={32}
-            height={32}
-          />
-        </a>
-      ))
-    }
+    <ul class='flex justify-center space-x-4'>
+      {
+        socialLinks.map((link) => (
+          <li>
+            <a
+              href={link.url}
+              class='text-text-dark dark:text-text-light hover:text-primary dark:hover:text-primary-light transition-colors'
+              target='_blank'
+              rel='noopener noreferrer'
+            >
+              <Icon
+                name={link.icon}
+                width={32}
+                height={32}
+              />
+            </a>
+          </li>
+        ))
+      }
+      <ThemeToggle />
+    </ul>
   </div>
 </div>
 

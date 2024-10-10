@@ -24,16 +24,18 @@ const sizeMap = {
 };
 
 const colorMap = {
-  primary: 'text-primary-dark dark:text-primary-light',
+  primary: 'text-primary dark:text-primary-light',
   secondary: 'text-secondary dark:text-secondary-light',
   accent: 'text-accent dark:text-accent-light',
-  light: 'text-neutral-100 dark:text-neutral-200',
-  dark: 'text-neutral-900 dark:text-neutral-100',
+  light: 'text-text-light dark:text-text-dark',
+  dark: 'text-text-dark dark:text-text-light',
 };
 
 const Tag = tagMap[level];
 const sizeClass = sizeMap[level];
-const colorClass = color ? colorMap[color] : '';
+const colorClass = color
+  ? colorMap[color]
+  : 'text-text-light dark:text-text-dark';
 ---
 
 <Tag class:list={[sizeClass, colorClass, className]}>

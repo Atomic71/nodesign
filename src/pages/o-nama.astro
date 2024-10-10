@@ -5,7 +5,6 @@ import Text from '@components/common/Text.astro';
 import { getContent } from '../utils/contentLoader';
 
 const aboutContent = await getContent('o-nama');
-console.log(aboutContent);
 if (!aboutContent) {
   return Astro.redirect('/404');
 }

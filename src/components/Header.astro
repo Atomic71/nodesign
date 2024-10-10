@@ -2,23 +2,30 @@
 import MobileMenuToggle from '@components/MobileMenuToggle.astro';
 import MobileMenu from '@components/MobileMenu.astro';
 import Icon from './common/Icon.astro';
+import ThemeToggle from './ThemeToggle.astro';
 ---
 
 <header
-  class='fixed top-0 left-0 right-0 z-50 transition-all duration-300'
+  class='fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-background-light dark:bg-background-dark'
   id='main-header'
 >
   <nav class='container mx-auto px-4 py-4'>
     <div class='flex justify-between items-center'>
       <a
         href={`/`}
-        class='text-2xl font-display font-bold text-nodesign-primary'
+        class='text-2xl font-display font-bold text-primary dark:text-primary-light'
       >
         <Icon
-          name={'nodesign-brand-light'}
+          name='nodesign-brand-light'
           width={200}
-          class='text-current'
-          id='nodesign-brand-logo'
+          class='text-current hidden dark:block'
+          id='nodesign-brand-logo-dark'
+        />
+        <Icon
+          name='nodesign-brand-dark'
+          width={200}
+          class='text-current dark:hidden'
+          id='nodesign-brand-logo-light'
         />
       </a>
 
@@ -26,14 +33,15 @@ import Icon from './common/Icon.astro';
       <div class='hidden md:flex space-x-8 items-center'>
         <a
           href={`/o-nama`}
-          class='text-gray-300 hover:text-gray-500'
+          class='text-secondary dark:text-secondary-light hover:text-primary dark:hover:text-primary-light transition-colors'
           >O nama</a
         >
         <a
           href={`/kontakt`}
-          class='text-gray-300 hover:text-gray-500'
+          class='text-secondary dark:text-secondary-light hover:text-primary dark:hover:text-primary-light transition-colors'
           >Kontakt</a
         >
+        <ThemeToggle />
       </div>
 
       <!-- Mobile Navigation Toggle -->

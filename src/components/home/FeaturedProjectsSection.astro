@@ -2,6 +2,7 @@
 import type { ProjectInfo } from '../../utils/images';
 import Section from '../Section.astro';
 import Thumbnail from '../Thumbnail.astro';
+import Text from '@components/common/Text.astro';
 
 interface FeaturedProject {
   category: string;
@@ -22,7 +23,12 @@ const { title, description, featuredProjects } = Astro.props;
   title={title}
   titleColor='secondary'
 >
-  <p class='text-center mb-8'>{description}</p>
+  <Text
+    level='body'
+    color='dark'
+    class='text-center mb-8'
+    >{description}</Text
+  >
   <div class='grid md:grid-cols-3 gap-8'>
     {
       featuredProjects.map(({ category, categorySlug, project }) => (

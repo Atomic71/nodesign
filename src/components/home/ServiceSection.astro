@@ -2,6 +2,7 @@
 import type { CategoryInfo } from '../../utils/images';
 import Section from '../Section.astro';
 import Thumbnail from '../Thumbnail.astro';
+import Text from '@components/common/Text.astro';
 
 interface Props {
   title: string;
@@ -14,9 +15,14 @@ const { title, description, categories } = Astro.props;
 
 <Section
   title={title}
-  backgroundColor='bg-neutral-100'
+  backgroundColor='bg-background-light dark:bg-background-dark'
 >
-  <p class='text-center mb-8'>{description}</p>
+  <Text
+    level='body'
+    color='dark'
+    class='text-center mb-8'
+    >{description}</Text
+  >
   <div class='grid md:grid-cols-3 gap-8'>
     {
       categories.map((category) => (
