@@ -33,8 +33,8 @@ module.exports = {
         },
       },
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
-        display: ['Playfair Display', 'serif'],
+        sans: ['quicksand', 'sans-serif'],
+        display: ['comissioner', 'serif'],
       },
     },
   },
