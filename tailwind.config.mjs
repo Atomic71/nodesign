@@ -1,3 +1,9 @@
+// #d5c8b8
+// #a3907d
+// #b8725f
+// #595c3e
+// #191815
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],

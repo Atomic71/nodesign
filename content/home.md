@@ -28,9 +28,9 @@ testimonials:
   title: Šta kažu naši klijenti
   items:
     - content: NoDesign je transformirao naš dom u prostor iz snova. Njihova pažnja prema detaljima i kvalitet izrade su izvanredni.
-      author: Ana K., Sarajevo
+      author: Nemanja V., Sarajevo
     - content: Izuzetno smo zadovoljni našim novim kancelarijskim prostorom. NoDesign je stvorio funkcionalano i inspirativno okruženje za naš tim.
-      author: Emir H., Tuzla
+      author: Andrej T., Banja Luka
 cta:
   title: Spremni za početak vašeg projekta?
   description: Kontaktirajte nas danas i pretvorite svoje ideje u stvarnost.

@@ -1,6 +1,7 @@
 ---
 import Text from '@components/common/Text.astro';
 import FooterList from './FooterList.astro';
+import Icon from './common/Icon.astro';
 
 const currentYear = new Date().getFullYear();
 
@@ -17,18 +18,30 @@ const contactInfo = [
   { text: 'Telefon: +387 XX XXX XXX' },
   { text: 'Adresa: Ulica i broj, Grad' },
 ];
+
+const socialLinks = [
+  {
+    name: 'Facebook',
+    icon: 'social-facebook-white',
+    url: 'https://facebook.com',
+  },
+  {
+    name: 'Instagram',
+    icon: 'social-instagram-white',
+    url: 'https://instagram.com',
+  },
+] as const;
 ---
 
 <footer class='bg-neutral-900 text-white'>
   <div class='container mx-auto px-4 py-12'>
     <div class='grid grid-cols-1 md:grid-cols-3 gap-8'>
       <div>
-        <Text
-          level='h3'
-          color='light'
+        <Icon
+          name='nodesign-brand-light'
+          width={200}
           class='mb-4'
-          >NoDesign</Text
-        >
+        />
         <Text
           level='small'
           color='light'
@@ -47,13 +60,33 @@ const contactInfo = [
         items={contactInfo}
       />
     </div>
-    <div class='border-t border-neutral-700 mt-8 pt-8 text-center'>
+    <div
+      class='border-t border-neutral-700 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center'
+    >
       <Text
         level='small'
         color='light'
       >
         &copy; {currentYear} NoDesign. Sva prava zadržana.
       </Text>
+      <div class='flex space-x-4 mt-4 md:mt-0'>
+        {
+          socialLinks.map((link) => (
+            <a
+              href={link.url}
+              target='_blank'
+              rel='noopener noreferrer'
+              class='text-white hover:text-primary transition-colors'
+            >
+              <Icon
+                name={link.icon}
+                width={24}
+                height={24}
+              />
+            </a>
+          ))
+        }
+      </div>
     </div>
   </div>
 </footer>

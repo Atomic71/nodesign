@@ -1,10 +1,14 @@
 ---
+import { Image } from 'astro:assets';
+
 export interface Props {
   name:
     | 'nodesign-brand-light'
     | 'nodesign-brand-dark'
-    | 'social-facebook'
-    | 'social-instagram';
+    | 'social-facebook-white'
+    | 'social-facebook-black'
+    | 'social-instagram-white'
+    | 'social-instagram-black';
   class?: string;
   width?: number;
   height?: number;
@@ -16,12 +20,14 @@ const { name, class: className, width = 24, height = 24, id } = Astro.props;
 const icons = {
   'nodesign-brand-light': '/icons/nodesign-brand-white.svg',
   'nodesign-brand-dark': '/icons/nodesign-brand-black.svg',
-  'social-instagram': '/icons/social-instagram.svg',
-  'social-facebook': '/icons/social-facebook.svg',
+  'social-instagram-white': '/icons/social-instagram-white.svg',
+  'social-facebook-white': '/icons/social-facebook-white.svg',
+  'social-instagram-black': '/icons/social-instagram-black.svg',
+  'social-facebook-black': '/icons/social-facebook-black.svg',
 };
 ---
 
-<img
+<Image
   id={id ?? name}
   src={icons[name]}
   alt={name.replace(/-/g, ' ')}

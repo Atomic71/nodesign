@@ -1,14 +1,23 @@
 ---
+import Icon from './common/Icon.astro';
+
 const menuItems = [
   { href: '/o-nama', text: 'O nama' },
   { href: '/kontakt', text: 'Kontakt' },
 ];
 
 const socialLinks = [
-  { href: 'https://facebook.com', text: 'Facebook' },
-  { href: 'https://instagram.com', text: 'Instagram' },
-  { href: 'https://linkedin.com', text: 'LinkedIn' },
-];
+  {
+    name: 'Facebook',
+    icon: 'social-facebook-black',
+    url: 'https://facebook.com',
+  },
+  {
+    name: 'Instagram',
+    icon: 'social-instagram-black',
+    url: 'https://instagram.com',
+  },
+] as const;
 ---
 
 <div
@@ -23,7 +32,7 @@ const socialLinks = [
             <li class='mb-8'>
               <a
                 href={item.href}
-                class={'text-3xl transition-colors'}
+                class='text-3xl transition-colors'
               >
                 {item.text}
               </a>
@@ -32,20 +41,22 @@ const socialLinks = [
         }
       </ul>
     </nav>
-    <div class='text-center'>
-      {
-        socialLinks.map((link) => (
-          <a
-            href={link.href}
-            class=' mx-4 hover:text-nodesign-accent transition-colors'
-            target='_blank'
-            rel='noopener noreferrer'
-          >
-            {link.text}
-          </a>
-        ))
-      }
-    </div>
+    {
+      socialLinks.map((link) => (
+        <a
+          href={link.url}
+          class='text-black hover:text-primary transition-colors'
+          target='_blank'
+          rel='noopener noreferrer'
+        >
+          <Icon
+            name={link.icon}
+            width={32}
+            height={32}
+          />
+        </a>
+      ))
+    }
   </div>
 </div>
 
