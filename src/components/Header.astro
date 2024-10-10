@@ -15,9 +15,10 @@ import Icon from './common/Icon.astro';
         class='text-2xl font-display font-bold text-nodesign-primary'
       >
         <Icon
-          name='nodesign-brand-light'
+          name={'nodesign-brand-light'}
           width={200}
           class='text-current'
+          id='nodesign-brand-logo'
         />
       </a>
 
@@ -69,14 +70,17 @@ import Icon from './common/Icon.astro';
 
 <script>
   const header = document.getElementById('main-header');
+  const logoIcon = document.getElementById('nodesign-brand-logo');
 
   const scrollThreshold = 50;
 
   function updateHeaderBackground() {
     if (window.scrollY > scrollThreshold) {
       header?.classList.add('scrolled');
+      logoIcon?.setAttribute('src', '/icons/nodesign-brand-black.svg');
     } else {
       header?.classList.remove('scrolled');
+      logoIcon?.setAttribute('src', '/icons/nodesign-brand-white.svg');
     }
   }
 

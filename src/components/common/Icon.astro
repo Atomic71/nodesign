@@ -8,9 +8,10 @@ export interface Props {
   class?: string;
   width?: number;
   height?: number;
+  id?: string;
 }
 
-const { name, class: className, width = 24, height = 24 } = Astro.props;
+const { name, class: className, width = 24, height = 24, id } = Astro.props;
 
 const icons = {
   'nodesign-brand-light': '/icons/nodesign-brand-white.svg',
@@ -21,6 +22,7 @@ const icons = {
 ---
 
 <img
+  id={id ?? name}
   src={icons[name]}
   alt={name.replace(/-/g, ' ')}
   class={className}
