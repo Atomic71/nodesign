@@ -1,0 +1,15 @@
+@font-face {
+    font-family: 'comissioner';
+    src: url('/fonts/comissioner.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+  
+  @font-face {
+    font-family: 'quicksand';
+    src: url('/fonts/quicksand.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
