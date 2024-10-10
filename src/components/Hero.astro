@@ -1,52 +1,87 @@
 ---
-import Text from '@components/common/Text.astro';
+import { Image } from 'astro:assets';
 
-interface Props {
+interface CarouselSlide {
+  image: string;
   title: string;
-  subtitle?: string;
-  backgroundImage: string;
-  ctaText?: string;
-  ctaLink?: string;
+  subtitle: string;
 }
 
-const { title, subtitle, backgroundImage, ctaText, ctaLink } = Astro.props;
+interface Props {
+  slides: CarouselSlide[];
+}
+
+const { slides } = Astro.props;
 ---
 
-<section class='relative h-[70vh] flex items-center justify-center'>
-  <div class='absolute inset-0 bg-black bg-opacity-50 z-10'></div>
-  <img
-    src={backgroundImage}
-    alt='Hero background'
-    class='absolute inset-0 w-full h-full object-cover'
-  />
-  <div class='relative z-20 text-center text-white px-4'>
-    <Text
-      level='h1'
-      color='light'
-      class='mb-4'
-    >
-      {title}
-    </Text>
+<div
+  class='relative w-full h-screen overflow-hidden'
+  id='hero-carousel'
+>
+  <div class='swiper-wrapper'>
     {
-      subtitle && (
-        <Text
-          level='body'
-          color='light'
-          class='mb-8 max-w-2xl mx-auto'
-        >
-          {subtitle}
-        </Text>
-      )
-    }
-    {
-      ctaText && ctaLink && (
-        <a
-          href={ctaLink}
-          class='bg-primary hover:bg-primary-dark text-white px-8 py-3 rounded-lg text-lg transition-all inline-block'
-        >
-          {ctaText}
-        </a>
-      )
+      slides.map((slide, index) => (
+        <div class='swiper-slide'>
+          <div class='relative w-full h-full'>
+            <Image
+              src={slide.image}
+              alt={slide.title}
+              class='absolute inset-0 w-full h-full object-cover'
+              width={1920}
+              height={1080}
+            />
+            <div class='absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center text-white p-4'>
+              <h1 class='text-3xl md:text-4xl lg:text-6xl font-bold mb-2 md:mb-4 text-center'>
+                {slide.title}
+              </h1>
+              <p class='text-lg md:text-xl lg:text-2xl max-w-2xl text-center'>
+                {slide.subtitle}
+              </p>
+            </div>
+          </div>
+        </div>
+      ))
     }
   </div>
-</section>
+  <div class='swiper-pagination'></div>
+  <div class='swiper-button-prev hidden md:flex'></div>
+  <div class='swiper-button-next hidden md:flex'></div>
+</div>
+
+<script>
+  import Swiper from 'swiper';
+  import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+  import 'swiper/css';
+  import 'swiper/css/navigation';
+  import 'swiper/css/pagination';
+
+  new Swiper('#hero-carousel', {
+    modules: [Navigation, Pagination, Autoplay],
+    slidesPerView: 1,
+    spaceBetween: 0,
+    loop: true,
+    autoplay: {
+      delay: 5000,
+      disableOnInteraction: false,
+    },
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    },
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+  });
+</script>
+
+<style>
+  .swiper-button-next,
+  .swiper-button-prev {
+    color: white;
+  }
+
+  .swiper-pagination-bullet {
+    background-color: white;
+  }
+</style>

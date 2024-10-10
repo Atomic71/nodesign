@@ -28,16 +28,12 @@ const featuredProjects = categories
     project: category.projects[0],
   }))
   .filter((item) => item.project);
+
+const carouselSlides = frontmatter.carouselSlides || [];
 ---
 
 <Layout>
-  <Hero
-    title={frontmatter.title}
-    subtitle={frontmatter.subtitle}
-    backgroundImage={frontmatter.heroImage}
-    ctaText={frontmatter.ctaText}
-    ctaLink={frontmatter.ctaLink}
-  />
+  <Hero slides={carouselSlides} />
 
   <ServiceSection
     title={frontmatter.services.title}

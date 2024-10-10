@@ -4,6 +4,16 @@ subtitle: Spoj tradicionalnog zanatstva i modernog dizajna za vaš savršen pros
 ctaText: Započnite svoj projekat
 ctaLink: /kontakt
 heroImage: /images/hero-background.jpg
+carouselSlides:
+  - image: /images/kancelarija-30.jpg
+    title: Custom Furniture Design
+    subtitle: Transforming spaces with handcrafted excellence
+  - image: /images/kancelarija-31.jpg
+    title: Residential Interiors
+    subtitle: Creating homes that reflect your personality
+  - image: /images/kancelarija-32.jpg
+    title: Commercial Spaces
+    subtitle: Designing productive and inspiring work environments
 services:
   title: Naše usluge
   description: Otkrijte našu paletu usluga dizajniranih da transformiraju vaš prostor
