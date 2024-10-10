@@ -8,4 +8,4 @@ form:
   submit: Pošalji poruku
 ---
 
-Imate pitanje ili želite započeti projekt? Kontaktirajte nas putem obrasca ispod ili nas nazovite na +387 XX XXX XXX. Radujemo se što ćemo vam pomoći u ostvarenju vaših ideja!
+Imate pitanje ili želite započeti projekt? Kontaktirajte nas putem obrasca ispod ili nas nazovite na +387 65 010 641. Radujemo se što ćemo vam pomoći u ostvarenju vaših ideja!
