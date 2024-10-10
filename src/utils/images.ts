@@ -203,8 +203,9 @@ export async function getCategories(): Promise<CategoryInfo[]> {
     ) as CategoryInfo[];
 
     console.log(
-      `Found ${validCategories.length} valid categories:`,
-      JSON.stringify(validCategories, null, 2)
+      `Found ${validCategories.length} valid categories:\n\n${validCategories
+        .map((x) => x.name)
+        .join('\n')}`
     );
 
     return validCategories;
