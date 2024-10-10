@@ -1,46 +1,37 @@
-// #d5c8b8
-// #a3907d
-// #b8725f
-// #595c3e
-// #191815
-
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
   content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
-  darkMode: 'class', // Enable dark mode
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
         primary: {
-          light: '#FFA500', // Light Orange
-          DEFAULT: '#FF8C00', // Dark Orange
-          dark: '#FF4500', // Red Orange
+          light: '#d5c8b8', // Beige
+          DEFAULT: '#b8725f', // Rust
+          dark: '#a65a47', // Darker Rust
         },
         secondary: {
-          light: '#8B4513', // Light Brown
-          DEFAULT: '#A0522D', // Sienna
-          dark: '#8B0000', // Dark Red
+          light: '#a3907d', // Taupe
+          DEFAULT: '#595c3e', // Olive
+          dark: '#454930', // Darker Olive
         },
         accent: {
-          light: '#FFD700', // Gold
-          DEFAULT: '#DAA520', // Goldenrod
-          dark: '#B8860B', // Dark Goldenrod
+          light: '#d5c8b8', // Beige
+          DEFAULT: '#a3907d', // Taupe
+          dark: '#8c7b69', // Darker Taupe
         },
-        neutral: {
-          100: '#F5F5F5', // Almost White
-          200: '#E0E0E0',
-          300: '#CCCCCC',
-          400: '#B8B8B8',
-          500: '#A4A4A4',
-          600: '#909090',
-          700: '#7C7C7C',
-          800: '#686868',
-          900: '#545454', // Dark Gray
+        background: {
+          light: '#f5f3f0', // Light background
+          dark: '#191815', // Dark background (Charcoal)
+        },
+        text: {
+          light: '#191815', // Dark text for light mode
+          dark: '#f5f3f0', // Light text for dark mode
         },
       },
       fontFamily: {
-        sans: ['quicksand', 'sans-serif'],
-        display: ['commissioner', 'serif'],
+        sans: ['Quicksand', 'sans-serif'],
+        display: ['Commissioner', 'serif'],
       },
     },
   },
