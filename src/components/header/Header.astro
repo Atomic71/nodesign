@@ -9,14 +9,20 @@ import ThemeToggle from '@components/common/ThemeToggle.astro';
   class='fixed top-0 left-0 right-0 z-50 transition-all duration-300'
   id='main-header'
 >
-  <nav class='container mx-auto px-4 py-10'>
+  <nav class='mx-auto px-10 py-10'>
     <div class='flex justify-between items-center'>
       <a href={`/`}>
+        <Icon
+          name='nodesign-brand-dark'
+          width={200}
+          class='text-current dark:hidden'
+          id='nodesign-brand-logo-dark'
+        />
         <Icon
           name='nodesign-brand-light'
           width={200}
           class='text-current'
-          id='nodesign-brand-logo'
+          id='nodesign-brand-logo-light'
         />
       </a>
 
@@ -32,7 +38,7 @@ import ThemeToggle from '@components/common/ThemeToggle.astro';
           href={`/kontakt`}
           >Kontakt</a
         >
-        <ThemeToggle key='main-header' />
+        <ThemeToggle key='main-header-toggle' />
       </div>
 
       <!-- Mobile Navigation Toggle -->
@@ -45,50 +51,71 @@ import ThemeToggle from '@components/common/ThemeToggle.astro';
 
 <MobileMenu />
 
-<style>
-  #main-header.scrolled {
-    @apply bg-white dark:bg-background-dark shadow-md;
-  }
+<style lang='scss' is:global>
   #main-header a {
     @apply text-white;
   }
 
-  html:not(.dark) #main-header.scrolled a {
+  html.dark #main-header.scrolled {
+    @apply bg-background-dark shadow-md;
+  }
+  html:not(.dark) #main-header {
+    &:not(.scrolled) {
+      #nodesign-brand-logo-dark {
+        @apply hidden;
+      }
+      #main-header-toggle {
+        @apply hidden;
+
+        svg#main-header-toggle-light,
+        svg#main-header-toggle-dark {
+          @apply hidden;
+        }
+      }
+    }
+    &.scrolled {
+      #nodesign-brand-logo-light {
+        @apply hidden;
+      }
+      #nodesign-brand-logo-dark {
+        @apply block;
+      }
+      @apply bg-white  dark:bg-background-dark shadow-md;
+
+      a {
+        @apply text-black;
+      }
+
+      #main-header-toggle {
+        svg#main-header-toggle-light {
+          @apply text-text-light fill-text-light;
+        }
+        svg#main-header-toggle-dark {
+          @apply text-text-light fill-text-light;
+        }
+      }
+    }
     @apply text-black;
   }
 </style>
 
 <script>
-  import {
-    toggleThemeProcedure,
-    initThemeToggle,
-  } from '../../utils/themeToggle.ts';
+  import { toggleThemeProcedure } from '../../utils/themeToggle.ts';
 
-  initThemeToggle('main-header');
-  const themeToggleBtn = document.getElementById('theme-toggle-key');
+  const themeToggleBtn = document.getElementById('main-header-toggle');
 
-  themeToggleBtn?.addEventListener('click', () =>
-    toggleThemeProcedure('theme-toggle-key')
-  );
+  themeToggleBtn?.addEventListener('click', toggleThemeProcedure);
 </script>
 
 <script>
   const header = document.getElementById('main-header');
-  const logoIcon = document.getElementById('nodesign-brand-logo');
-
-  const scrollThreshold = 50;
+  const scrollThreshold = 150;
 
   function updateHeaderBackground() {
-    const currentTheme = localStorage.getItem('color-theme');
-
     if (window.scrollY > scrollThreshold) {
       header?.classList.add('scrolled');
-      if (currentTheme !== 'dark') {
-        logoIcon?.setAttribute('src', '/icons/nodesign-brand-dark.svg');
-      }
     } else {
       header?.classList.remove('scrolled');
-      logoIcon?.setAttribute('src', '/icons/nodesign-brand-light.svg');
     }
   }
 
