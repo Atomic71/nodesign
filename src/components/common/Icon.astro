@@ -1,14 +1,13 @@
 ---
 import { Image } from 'astro:assets';
 
+type ThemedIcons = 'nodesign-brand' | 'social-facebook' | 'social-instagram';
+type ThemedIcon = `${ThemedIcons}-${'light' | 'dark'}`;
+
+type IconName = ThemedIcon;
+type IconPath = `/icons/${IconName}.svg`;
 export interface Props {
-  name:
-    | 'nodesign-brand-light'
-    | 'nodesign-brand-dark'
-    | 'social-facebook-white'
-    | 'social-facebook-black'
-    | 'social-instagram-white'
-    | 'social-instagram-black';
+  name: IconName;
   class?: string;
   width?: number;
   height?: number;
@@ -17,13 +16,13 @@ export interface Props {
 
 const { name, class: className, width = 24, height = 24, id } = Astro.props;
 
-const icons = {
-  'nodesign-brand-light': '/icons/nodesign-brand-white.svg',
-  'nodesign-brand-dark': '/icons/nodesign-brand-black.svg',
-  'social-instagram-white': '/icons/social-instagram-white.svg',
-  'social-facebook-white': '/icons/social-facebook-white.svg',
-  'social-instagram-black': '/icons/social-instagram-black.svg',
-  'social-facebook-black': '/icons/social-facebook-black.svg',
+const icons: Record<IconName, IconPath> = {
+  'nodesign-brand-light': '/icons/nodesign-brand-light.svg',
+  'nodesign-brand-dark': '/icons/nodesign-brand-dark.svg',
+  'social-instagram-light': '/icons/social-instagram-light.svg',
+  'social-facebook-light': '/icons/social-facebook-light.svg',
+  'social-instagram-dark': '/icons/social-instagram-dark.svg',
+  'social-facebook-dark': '/icons/social-facebook-dark.svg',
 };
 ---
 
