@@ -2,10 +2,11 @@
 export interface Props {
   level: 'h1' | 'h2' | 'h3' | 'body' | 'small';
   color?: 'primary' | 'secondary' | 'accent' | 'light' | 'dark';
+  themed?: boolean;
   class?: string;
 }
 
-const { level, color, class: className } = Astro.props;
+const { level, color, themed = true, class: className } = Astro.props;
 
 const tagMap = {
   h1: 'h1',
@@ -27,15 +28,27 @@ const colorMap = {
   primary: 'text-primary dark:text-primary-light',
   secondary: 'text-secondary dark:text-secondary-light',
   accent: 'text-accent dark:text-accent-light',
-  light: 'text-text-light dark:text-text-dark',
-  dark: 'text-text-dark dark:text-text-light',
+  light: 'text-text-dark',
+  dark: 'text-text-light',
+};
+
+const themedColorMap = {
+  primary: 'text-primary dark:text-primary-light',
+  secondary: 'text-secondary dark:text-secondary-light',
+  accent: 'text-accent dark:text-accent-light',
+  light: 'text-text-dark',
+  dark: 'text-text-light',
 };
 
 const Tag = tagMap[level];
 const sizeClass = sizeMap[level];
 const colorClass = color
-  ? colorMap[color]
-  : 'text-text-light dark:text-text-dark';
+  ? themed
+    ? themedColorMap[color]
+    : colorMap[color]
+  : themed
+    ? 'text-text-light dark:text-text-light'
+    : '';
 ---
 
 <Tag class:list={[sizeClass, colorClass, className]}>

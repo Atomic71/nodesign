@@ -1,6 +1,6 @@
 ---
-import Icon from './common/Icon.astro';
-import ThemeToggle from './ThemeToggle.astro';
+import Icon from '@components/common/Icon.astro';
+import ThemeToggle from '@components/common/ThemeToggle.astro';
 
 const menuItems = [
   { href: '/o-nama', text: 'O nama' },
@@ -10,12 +10,12 @@ const menuItems = [
 const socialLinks = [
   {
     name: 'Facebook',
-    icon: 'social-facebook-black',
+    icon: 'social-facebook-dark',
     url: 'https://facebook.com',
   },
   {
     name: 'Instagram',
-    icon: 'social-instagram-black',
+    icon: 'social-instagram-dark',
     url: 'https://instagram.com',
   },
 ] as const;
@@ -31,12 +31,7 @@ const socialLinks = [
         {
           menuItems.map((item) => (
             <li class='mb-8'>
-              <a
-                href={item.href}
-                class='text-3xl text-text-dark dark:text-text-light transition-colors'
-              >
-                {item.text}
-              </a>
+              <a href={item.href}>{item.text}</a>
             </li>
           ))
         }
@@ -48,7 +43,6 @@ const socialLinks = [
           <li>
             <a
               href={link.url}
-              class='text-text-dark dark:text-text-light hover:text-primary dark:hover:text-primary-light transition-colors'
               target='_blank'
               rel='noopener noreferrer'
             >
@@ -61,7 +55,7 @@ const socialLinks = [
           </li>
         ))
       }
-      <ThemeToggle />
+      <ThemeToggle key='mobile-header' />
     </ul>
   </div>
 </div>

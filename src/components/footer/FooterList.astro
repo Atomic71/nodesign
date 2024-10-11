@@ -19,24 +19,15 @@ const { title, items } = Astro.props;
     level='h3'
     color='light'
     class='mb-4'
-    >{title}</Text
   >
+    {title}
+  </Text>
   <ul class='space-y-2'>
     {
       items.map((item) => (
         <li>
           {item.link ? (
-            <a
-              href={item.link}
-              class='text-text-light dark:text-text-dark hover:text-primary dark:hover:text-primary-light'
-            >
-              <Text
-                level='small'
-                color='light'
-              >
-                {item.text}
-              </Text>
-            </a>
+            <a href={item.link}>{item.text}</a>
           ) : (
             <Text
               level='small'

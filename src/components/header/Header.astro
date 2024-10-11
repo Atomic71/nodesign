@@ -1,0 +1,97 @@
+---
+import MobileMenuToggle from './MobileMenuToggle.astro';
+import MobileMenu from './MobileMenu.astro';
+import Icon from '@components/common/Icon.astro';
+import ThemeToggle from '@components/common/ThemeToggle.astro';
+---
+
+<header
+  class='fixed top-0 left-0 right-0 z-50 transition-all duration-300'
+  id='main-header'
+>
+  <nav class='container mx-auto px-4 py-10'>
+    <div class='flex justify-between items-center'>
+      <a href={`/`}>
+        <Icon
+          name='nodesign-brand-light'
+          width={200}
+          class='text-current'
+          id='nodesign-brand-logo'
+        />
+      </a>
+
+      <!-- Desktop Navigation -->
+      <div class='hidden md:flex space-x-8 items-center'>
+        <a
+          class='text-2xl'
+          href={`/o-nama`}
+          >O nama</a
+        >
+        <a
+          class='text-2xl'
+          href={`/kontakt`}
+          >Kontakt</a
+        >
+        <ThemeToggle key='main-header' />
+      </div>
+
+      <!-- Mobile Navigation Toggle -->
+      <div class='md:hidden'>
+        <MobileMenuToggle />
+      </div>
+    </div>
+  </nav>
+</header>
+
+<MobileMenu />
+
+<style>
+  #main-header.scrolled {
+    @apply bg-white dark:bg-background-dark shadow-md;
+  }
+  #main-header a {
+    @apply text-white;
+  }
+
+  html:not(.dark) #main-header.scrolled a {
+    @apply text-black;
+  }
+</style>
+
+<script>
+  import {
+    toggleThemeProcedure,
+    initThemeToggle,
+  } from '../../utils/themeToggle.ts';
+
+  initThemeToggle('main-header');
+  const themeToggleBtn = document.getElementById('theme-toggle-key');
+
+  themeToggleBtn?.addEventListener('click', () =>
+    toggleThemeProcedure('theme-toggle-key')
+  );
+</script>
+
+<script>
+  const header = document.getElementById('main-header');
+  const logoIcon = document.getElementById('nodesign-brand-logo');
+
+  const scrollThreshold = 50;
+
+  function updateHeaderBackground() {
+    const currentTheme = localStorage.getItem('color-theme');
+
+    if (window.scrollY > scrollThreshold) {
+      header?.classList.add('scrolled');
+      if (currentTheme !== 'dark') {
+        logoIcon?.setAttribute('src', '/icons/nodesign-brand-dark.svg');
+      }
+    } else {
+      header?.classList.remove('scrolled');
+      logoIcon?.setAttribute('src', '/icons/nodesign-brand-light.svg');
+    }
+  }
+
+  window.addEventListener('scroll', updateHeaderBackground);
+  updateHeaderBackground();
+</script>

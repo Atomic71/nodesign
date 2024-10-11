@@ -1,41 +1,22 @@
 ---
 import Text from '@components/common/Text.astro';
+import Icon from '@components/common/Icon.astro';
 import FooterList from './FooterList.astro';
-import Icon from './common/Icon.astro';
+import { getContent } from '@utils/contentLoader';
 
 const currentYear = new Date().getFullYear();
+export const prerender = true;
+const footerContent = await getContent('footer');
+if (!footerContent) {
+  return Astro.redirect('/404');
+}
+const { quickLinks, contactInfo, socialLinks, description } =
+  footerContent.frontmatter;
 
-const quickLinks = [
-  { text: 'Kancelarijski prostori', link: '/galerija/kancelarijski-prostor' },
-  { text: 'Namještaj po mjeri', link: '/galerija/namjestaj-po-mjeri' },
-  { text: 'Uređenje doma', link: '/galerija/uredjenje-doma' },
-  { text: 'O nama', link: '/o-nama' },
-  { text: 'Kontakt', link: '/kontakt' },
-];
-
-const contactInfo = [
-  { text: 'Email: info@nodesign.ba' },
-  { text: 'Telefon: +387 65 010 641' },
-  { text: 'Adresa: Ulica i broj, Grad' },
-];
-
-const socialLinks = [
-  {
-    name: 'Facebook',
-    icon: 'social-facebook-white',
-    url: 'https://facebook.com',
-  },
-  {
-    name: 'Instagram',
-    icon: 'social-instagram-white',
-    url: 'https://instagram.com',
-  },
-] as const;
+console.log(footerContent);
 ---
 
-<footer
-  class='bg-secondary dark:bg-secondary-dark text-text-light dark:text-text-dark'
->
+<footer class='bg-secondary dark:bg-secondary-dark'>
   <div class='container mx-auto px-4 py-12'>
     <div class='grid grid-cols-1 md:grid-cols-3 gap-8'>
       <div>
@@ -48,9 +29,7 @@ const socialLinks = [
           level='small'
           color='light'
         >
-          Spajamo tradicionalno zanatstvo sa modernim dizajnom kako bismo
-          stvorili jedinstvene prostore i namještaj koji odražavaju vašu
-          osobnost.
+          {description}
         </Text>
       </div>
       <FooterList
@@ -78,7 +57,6 @@ const socialLinks = [
               href={link.url}
               target='_blank'
               rel='noopener noreferrer'
-              class='text-text-light dark:text-text-dark hover:text-primary dark:hover:text-primary-light transition-colors'
             >
               <Icon
                 name={link.icon}

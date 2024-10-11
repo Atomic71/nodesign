@@ -1,8 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Section from '../components/Section.astro';
 import Text from '@components/common/Text.astro';
 import { getContent } from '../utils/contentLoader';
+import Section from '@components/common/Section.astro';
 
 const aboutContent = await getContent('o-nama');
 if (!aboutContent) {

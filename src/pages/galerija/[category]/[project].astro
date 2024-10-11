@@ -37,10 +37,7 @@ const { frontmatter } = projectContent;
 <Layout title={`${project.name} | ${category.name} | NoDesign`}>
   <Section>
     <nav class='mb-8'>
-      <a
-        href={`/galerija/${category.slug}`}
-        class='text-gray-600 hover:text-gray-900'
-      >
+      <a href={`/galerija/${category.slug}`}>
         ← {frontmatter.backToCategory}
       </a>
     </nav>

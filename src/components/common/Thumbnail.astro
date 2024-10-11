@@ -1,5 +1,5 @@
 ---
-import Text from '@components/common/Text.astro';
+import Text from './Text.astro';
 
 interface Props {
   image: string;
@@ -27,6 +27,7 @@ const { image, title, description, link } = Astro.props;
       <Text
         level='h3'
         color='light'
+        themed={false}
         class='mb-2'
         >{title}</Text
       >
@@ -35,7 +36,8 @@ const { image, title, description, link } = Astro.props;
           <Text
             level='small'
             color='light'
-            class='line-clamp-2'
+            class='lipne-clamp-2'
+            themed={false}
           >
             {description}
           </Text>
