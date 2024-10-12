@@ -1,0 +1,66 @@
+---
+import Layout from '@layouts/Layout.astro';
+import Section from '@components/common/Section.astro';
+import Text from '@components/common/Text.astro';
+import ServiceCard from '@components/common/ServiceCard.astro';
+
+const services = [
+  {
+    title: 'Opremanje doma',
+    description: 'Transformišemo vaš životni prostor u oazu udobnosti i stila.',
+    slug: 'uredjenje-doma',
+    subServices: [
+      { icon: 'bathroom', title: 'Renoviranje kupatila' },
+      { icon: 'kitchen', title: 'Renoviranje kuhinje' },
+      { icon: 'livingroom', title: 'Dnevni boravak' },
+      { icon: 'bedroom', title: 'Spavaća soba' },
+    ],
+  },
+  {
+    title: 'Kancelarijski prostor',
+    description: 'Kreiramo produktivne i inspirativne radne sredine.',
+    slug: 'kancelarijski-prostor',
+    subServices: [
+      { icon: 'openspace', title: 'Open Space uredi' },
+      { icon: 'meetingroom', title: 'Sale za sastanke' },
+      { icon: 'reception', title: 'Recepcije' },
+      { icon: 'executiveoffice', title: 'Direktorske kancelarije' },
+    ],
+  },
+  {
+    title: 'Namještaj po mjeri',
+    description: 'Jedinstveni komadi koji odražavaju vašu osobnost i potrebe.',
+    slug: 'namjestaj-po-mjeri',
+    subServices: [
+      { icon: 'wardrobe', title: 'Garderoberi' },
+      { icon: 'customkitchen', title: 'Kuhinje po mjeri' },
+      { icon: 'customstorage', title: 'Police i skladišni prostor' },
+      { icon: 'customfurniture', title: 'Specijalni komadi namještaja' },
+    ],
+  },
+];
+---
+
+<Layout title='Naše Usluge | NoDesign'>
+  <Section title='Naše Usluge'>
+    <Text
+      level='body'
+      color='dark'
+      class='text-center mb-12'
+    >
+      Otkrijte našu paletu usluga dizajniranih da transformiraju vaš prostor u
+      nešto izvanredno.
+    </Text>
+
+    {
+      services.map((service) => (
+        <ServiceCard
+          title={service.title}
+          description={service.description}
+          slug={service.slug}
+          subServices={service.subServices}
+        />
+      ))
+    }
+  </Section>
+</Layout>

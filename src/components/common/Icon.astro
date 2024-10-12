@@ -1,12 +1,18 @@
 ---
-import { Image } from 'astro:assets';
 import Svg from '@cxa/astro-inline-svg';
 
 import NodeDesignBrand from '@assets/icons/nodesign-brand.svg?raw';
 import SocialFacebook from '@assets/icons/social-facebook.svg?raw';
 import SocialInstagram from '@assets/icons/social-instagram.svg?raw';
+import Home from '@assets/icons/home.svg?raw';
+import ChevronRight from '@assets/icons/chevron-right.svg?raw';
 
-type IconName = 'nodesign-brand' | 'social-facebook' | 'social-instagram';
+type IconName =
+  | 'nodesign-brand'
+  | 'social-facebook'
+  | 'social-instagram'
+  | 'home'
+  | 'chevron-right';
 export interface Props {
   name: IconName;
   class?: string;
@@ -28,6 +34,8 @@ const icons: Record<IconName, string> = {
   'nodesign-brand': NodeDesignBrand,
   'social-instagram': SocialInstagram,
   'social-facebook': SocialFacebook,
+  home: Home,
+  'chevron-right': ChevronRight,
 };
 ---
 

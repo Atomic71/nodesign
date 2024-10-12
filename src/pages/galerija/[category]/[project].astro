@@ -2,6 +2,7 @@
 import Layout from '@layouts/Layout.astro';
 import Section from '@components/common/Section.astro';
 import Text from '@components/common/Text.astro';
+import Breadcrumb from '@components/common/Breadcrumb.astro';
 import { getCategories } from '@utils/images';
 import { getContent } from '@utils/contentLoader';
 import type { CategoryInfo, ProjectInfo } from '@utils/images';
@@ -32,16 +33,17 @@ if (!projectContent) {
   return Astro.redirect('/404');
 }
 const { frontmatter } = projectContent;
+
+const breadcrumbItems = [
+  { label: 'Galerija', href: '/galerija' },
+  { label: category.name, href: `/galerija/${category.slug}` },
+  { label: project.name, href: `/galerija/${category.slug}/${project.slug}` },
+];
 ---
 
 <Layout title={`${project.name} | ${category.name} | NoDesign`}>
   <Section>
-    <nav class='mb-8'>
-      <a href={`/galerija/${category.slug}`}>
-        ← {frontmatter.backToCategory}
-      </a>
-    </nav>
-
+    <Breadcrumb items={breadcrumbItems} />
     <Text
       level='h1'
       color='primary'

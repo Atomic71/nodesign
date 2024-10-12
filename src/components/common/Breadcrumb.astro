@@ -1,0 +1,61 @@
+---
+import Icon from './Icon.astro';
+
+export interface BreadcrumbItem {
+  label: string;
+  href: string;
+}
+
+interface Props {
+  items: BreadcrumbItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<nav
+  aria-label='Breadcrumb'
+  class='mb-4'
+>
+  <ol
+    class='flex flex-wrap items-center space-x-2 text-sm text-gray-500 dark:text-gray-400'
+  >
+    <li>
+      <a
+        href='/'
+        class='hover:text-primary transition-colors duration-200'
+      >
+        <Icon
+          name='home'
+          width={20}
+        />
+        <span class='sr-only'>Home</span>
+      </a>
+    </li>
+    {
+      items.map((item, index) => (
+        <li class='flex items-center'>
+          <Icon
+            name='chevron-right'
+            class='w-4 h-4'
+          />
+          {index === items.length - 1 ? (
+            <span
+              aria-current='page'
+              class='text-gray-900 dark:text-white font-medium'
+            >
+              {item.label}
+            </span>
+          ) : (
+            <a
+              href={item.href}
+              class='hover:text-primary transition-colors duration-200'
+            >
+              {item.label}
+            </a>
+          )}
+        </li>
+      ))
+    }
+  </ol>
+</nav>

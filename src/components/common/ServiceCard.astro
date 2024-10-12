@@ -1,0 +1,53 @@
+---
+import Text from '@components/common/Text.astro';
+import Icon from '@components/common/Icon.astro';
+import ServiceCarItem from './ServiceCarItem.astro';
+
+interface SubService {
+  icon: string;
+  title: string;
+}
+
+interface Props {
+  title: string;
+  description: string;
+  slug: string;
+  subServices: SubService[];
+}
+
+const { title, description, slug, subServices } = Astro.props;
+---
+
+<div class='mb-16'>
+  <Text
+    level='h2'
+    color='primary'
+    class='mb-4'
+    >{title}</Text
+  >
+  <Text
+    level='body'
+    color='dark'
+    class='mb-6'
+    >{description}</Text
+  >
+  <a
+    href={`/galerija/${slug}`}
+    class='text-primary hover:underline mb-8 inline-block'
+  >
+    Pogledajte projekte <Icon
+      name='chevron-right'
+      class='inline-block ml-1'
+    />
+  </a>
+  <div class='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-6'>
+    {
+      subServices.map((subService) => (
+        <ServiceCarItem
+          icon={subService.icon}
+          title={subService.title}
+        />
+      ))
+    }
+  </div>
+</div>

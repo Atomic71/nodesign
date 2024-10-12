@@ -1,6 +1,7 @@
 ---
 import Layout from '@layouts/Layout.astro';
 import Thumbnail from '@components/common/Thumbnail.astro';
+import Breadcrumb from '@components/common/Breadcrumb.astro';
 import { getCategories } from '../../utils/images';
 import { getContent } from '../../utils/contentLoader';
 import type { CategoryInfo } from '../../utils/images';
@@ -30,10 +31,22 @@ const categoryTitle =
   frontmatter.categories[category.slug]?.title || category.name;
 const categoryDescription =
   frontmatter.categories[category.slug]?.description || '';
+
+const breadcrumbItems = [
+  { label: 'Galerija', href: '/galerija' },
+  { label: categoryTitle, href: `/galerija/${category.slug}` },
+];
 ---
 
 <Layout title={`${categoryTitle} | NoDesign`}>
-  <Section title={categoryTitle}>
+  <Section>
+    <Breadcrumb items={breadcrumbItems} />
+    <Text
+      level='h1'
+      color='primary'
+      class='mb-4'
+      >{categoryTitle}</Text
+    >
     {
       categoryDescription && (
         <Text
