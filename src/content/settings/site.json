@@ -1,0 +1,56 @@
+{
+  "title": "NoDesign",
+  "description": "Vrhunski dizajn i izrada namještaja po mjeri",
+  "url": "https://nodesign.ba",
+  "logo": "/images/nodesign-logo.svg",
+  "email": "info@nodesign.ba",
+  "phone": "+387 65 010 641",
+  "address": "Ulica i broj, Grad, Država",
+  "socialMedia": [
+    {
+      "platform": "Facebook",
+      "url": "https://facebook.com/nodesign",
+      "icon": "facebook"
+    },
+    {
+      "platform": "Instagram",
+      "url": "https://instagram.com/nodesign",
+      "icon": "instagram"
+    }
+  ],
+  "navigation": [
+    {
+      "label": "Početna",
+      "url": "/"
+    },
+    {
+      "label": "Usluge",
+      "url": "/usluge"
+    },
+    {
+      "label": "O nama",
+      "url": "/o-nama"
+    },
+    {
+      "label": "Kontakt",
+      "url": "/kontakt"
+    }
+  ],
+  "contactInfo": [
+    {
+      "label": "Email: info@nodesign.ba",
+      "link": "mailto:info@nodesign.ba",
+      "icon": "email"
+    },
+    {
+      "label": "Telefon: +387 65 010 641",
+      "link": "tel:+38765010641",
+      "icon": "phone"
+    },
+    {
+      "label": "Adresa: Ulica i broj, Grad",
+      "link": "https://goo.gl/maps/yourGoogleMapsLink",
+      "icon": "map-pin"
+    }
+  ]
+}

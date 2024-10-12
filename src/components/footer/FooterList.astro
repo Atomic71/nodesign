@@ -2,8 +2,9 @@
 import Text from '@components/common/Text.astro';
 
 interface ListItem {
-  text: string;
+  label: string;
   link?: string;
+  icon?: string;
 }
 
 interface Props {
@@ -27,13 +28,13 @@ const { title, items = [] } = Astro.props;
       items.map((item) => (
         <li>
           {item.link ? (
-            <a href={item.link}>{item.text}</a>
+            <a href={item.link}>{item.label}</a>
           ) : (
             <Text
               level='small'
               color='light'
             >
-              {item.text}
+              {item.label}
             </Text>
           )}
         </li>

@@ -2,16 +2,14 @@
 import Text from '@components/common/Text.astro';
 import Icon from '@components/common/Icon.astro';
 import FooterList from './FooterList.astro';
-import { getContent } from '@utils/contentLoader';
+import { getCollection } from 'astro:content';
 
 const currentYear = new Date().getFullYear();
-export const prerender = true;
-const footerContent = await getContent('footer');
-if (!footerContent) {
+const settings = await getCollection('settings');
+if (!settings) {
   return Astro.redirect('/404');
 }
-const { quickLinks, contactInfo, socialLinks, description } =
-  footerContent.frontmatter;
+const data = settings[0].data;
 ---
 
 <footer class='bg-secondary dark:bg-secondary-dark'>
@@ -27,16 +25,16 @@ const { quickLinks, contactInfo, socialLinks, description } =
           level='small'
           color='light'
         >
-          {description}
+          {data.description}
         </Text>
       </div>
       <FooterList
         title='Brzi linkovi'
-        items={quickLinks}
+        items={settings[0].data.navigation}
       />
       <FooterList
         title='Kontakt informacije'
-        items={contactInfo}
+        items={data.contactInfo}
       />
     </div>
     <div
@@ -50,14 +48,14 @@ const { quickLinks, contactInfo, socialLinks, description } =
       </Text>
       <div class='flex space-x-4 mt-4 md:mt-0'>
         {
-          socialLinks.map((link) => (
+          data.socialMedia.map((link) => (
             <a
               href={link.url}
               target='_blank'
               rel='noopener noreferrer'
             >
               <Icon
-                name={link.icon}
+                name={'home'}
                 width={24}
                 height={24}
               />
