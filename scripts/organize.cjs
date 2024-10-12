@@ -4,7 +4,15 @@ const path = require('path');
 const parentDir = path.resolve(__dirname, '../src');
 const destinationFolder = path.resolve(parentDir, '../collected_files');
 
-const fileExtensions = ['.ts', '.js', '.mjs', '.astro', '.config'];
+const fileExtensions = [
+  '.ts',
+  '.js',
+  '.mjs',
+  '.astro',
+  '.config',
+  '.md',
+  '.json',
+];
 
 async function organizeFiles(currentDir) {
   try {
