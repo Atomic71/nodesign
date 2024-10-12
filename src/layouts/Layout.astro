@@ -10,9 +10,10 @@ interface Props {
   title?: string;
   description?: string;
   image?: string;
+  regularHeader?: boolean;
 }
 
-const { title, description, image } = Astro.props;
+const { title, description, image, regularHeader = false } = Astro.props;
 ---
 
 <!doctype html>
@@ -46,8 +47,8 @@ const { title, description, image } = Astro.props;
   <body
     class='bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark flex flex-col min-h-screen transition-colors duration-300'
   >
-    <Header />
-    <main class='flex-grow'>
+    <Header regularHeader={regularHeader} />
+    <main class:list={['flex-grow', { 'pt-10': regularHeader }]}>
       <slot />
     </main>
     <Footer />

@@ -33,6 +33,22 @@ const projects = defineCollection({
     order: z.number().optional(),
   }),
 });
+
+const about = defineCollection({
+  type: 'data',
+  schema: z.object({
+    title: z.string(),
+    mission: z.object({
+      title: z.string(),
+      description: z.string(),
+    }),
+    team: z.object({
+      title: z.string(),
+      description: z.string(),
+    }),
+  }),
+});
+
 const settings = defineCollection({
   type: 'data',
   schema: z.object({
@@ -81,4 +97,5 @@ export const collections = {
   settings,
   home,
   contact,
+  about,
 };

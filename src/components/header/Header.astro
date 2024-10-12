@@ -6,10 +6,22 @@ import ThemeToggle from '@components/common/ThemeToggle.astro';
 import { getCollection } from 'astro:content';
 
 const settings = await getCollection('settings');
+
+interface Props {
+  regularHeader?: boolean;
+}
+
+const { regularHeader = false } = Astro.props;
 ---
 
 <header
-  class:list={['fixed top-0 left-0 right-0 z-50 transition-all duration-300']}
+  class:list={[
+    'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
+    {
+      scrolled: !!regularHeader,
+    },
+  ]}
+  data-regular-header={regularHeader}
   id='main-header'
 >
   <nav class='container py-3'>
@@ -98,6 +110,11 @@ const settings = await getCollection('settings');
 
   function updateHeaderBackground() {
     const header = document.getElementById('main-header');
+
+    if (header?.attributes['data-regular-header']) {
+      return;
+    }
+
     const scrollThreshold = 150;
     if (window.scrollY > scrollThreshold) {
       header?.classList.add('scrolled');

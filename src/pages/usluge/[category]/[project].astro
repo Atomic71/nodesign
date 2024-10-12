@@ -7,6 +7,7 @@ import { getCategories } from '@utils/images';
 import { getContent } from '@utils/contentLoader';
 import type { CategoryInfo, ProjectInfo } from '@utils/images';
 import 'photoswipe/style.css';
+import { getCollection } from 'astro:content';
 
 export const prerender = true;
 
@@ -15,8 +16,14 @@ export async function getStaticPaths() {
 
   return categories.flatMap((category) =>
     category.projects.map((project) => ({
-      params: { category: category.slug, project: project.slug },
-      props: { category, project },
+      params: {
+        category: category.slug,
+        project: project.slug,
+      },
+      props: {
+        category,
+        project,
+      },
     }))
   );
 }
@@ -28,20 +35,22 @@ interface Props {
 
 const { category, project } = Astro.props;
 
-const projectContent = await getContent('projects');
-if (!projectContent) {
-  return Astro.redirect('/404');
-}
-const { frontmatter } = projectContent;
+// const projectContent = await getCollection('projects');
+// if (!projectContent) {
+//   return Astro.redirect('/404');
+// }
 
 const breadcrumbItems = [
-  { label: 'Galerija', href: '/galerija' },
-  { label: category.name, href: `/galerija/${category.slug}` },
-  { label: project.name, href: `/galerija/${category.slug}/${project.slug}` },
+  { label: 'Usluge', href: '/usluge' },
+  { label: category.name, href: `/usluge/${category.slug}` },
+  { label: project.name, href: `/usluge/${category.slug}/${project.slug}` },
 ];
 ---
 
-<Layout title={`${project.name} | ${category.name} | NoDesign`}>
+<Layout
+  title={`${project.name} | ${category.name} | NoDesign`}
+  regularHeader
+>
   <Section>
     <Breadcrumb items={breadcrumbItems} />
     <Text
