@@ -3,12 +3,6 @@
 @tailwind utilities;
 
 
-.theme-light {
-    --background: #f5f3f0;
-    --text: #191815
-}
-
-.theme-dark {
-    --background: #191815;
-    --text: #f5f3f0
+a {
+    @apply text-text-light dark:text-text-dark hover:text-primary-dark dark:hover:text-primary-light transition-colors;
 }

@@ -11,13 +11,13 @@
       "platform": "Facebook",
       "url": "https://www.facebook.com/nodesignbih/",
       "icon": "social-facebook",
-      "description": "Pratite nas na Facebooku"
+      "label": "Pratite nas na Facebooku"
     },
     {
       "platform": "Instagram",
       "url": "https://www.instagram.com/no_design_bih/",
       "icon": "social-instagram",
-      "description": "Pratite nas na Instagramu"
+      "label": "Pratite nas na Instagramu"
     }
   ],
   "navigation": [
@@ -41,12 +41,12 @@
   "contactInfo": [
     {
       "label": "Email: info@nodesign.ba",
-      "link": "mailto:info@nodesign.ba",
+      "url": "mailto:info@nodesign.ba",
       "icon": "email"
     },
     {
       "label": "Telefon: +387 65 010 641",
-      "link": "tel:+38765010641",
+      "url": "tel:+38765010641",
       "icon": "phone"
     }
   ]

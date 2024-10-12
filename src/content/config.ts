@@ -48,7 +48,7 @@ const settings = defineCollection({
         platform: z.string(),
         url: z.string().url(),
         icon: iconSchema,
-        description: z.string(),
+        label: z.string(),
       })
     ),
     navigation: z.array(
@@ -60,7 +60,7 @@ const settings = defineCollection({
     contactInfo: z.array(
       z.object({
         label: z.string(),
-        link: z.string(),
+        url: z.string(),
         icon: iconSchema,
       })
     ),
