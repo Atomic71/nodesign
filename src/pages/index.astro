@@ -8,6 +8,7 @@ import TestimonialsSection from '@components/home/TestimonialsSection.astro';
 import CtaSection from '@components/home/CtaSection.astro';
 import { getCategories } from '@utils/images';
 import { getContent } from '@utils/contentLoader';
+import CategorySection from '@components/common/CategorySection.astro';
 
 export const prerender = true;
 
@@ -35,11 +36,22 @@ const carouselSlides = frontmatter.carouselSlides || [];
 <Layout>
   <Hero slides={carouselSlides} />
 
-  <ServiceSection
+  <!-- <ServiceSection
     title={frontmatter.services.title}
     description={frontmatter.services.description}
     categories={categories}
-  />
+  /> -->
+  {
+    categories.map((category, index) => (
+      <CategorySection
+        title={category.name}
+        description={category.description || ''}
+        image={category.projects[0]?.coverImage || '/api/placeholder/600/400'}
+        link={`/galerija/${category.slug}`}
+        reverse={index % 2 !== 0}
+      />
+    ))
+  }
 
   <FeaturedProjectsSection
     title={frontmatter.featuredProjects.title}

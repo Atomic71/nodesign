@@ -1,7 +1,9 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from '@layouts/Layout.astro';
+import { getContent } from '@utils/contentLoader';
+import { Image } from 'astro:assets';
+import aboutBackground from '@assets/photos/kancelarija-2.jpg';
 import Text from '@components/common/Text.astro';
-import { getContent } from '../utils/contentLoader';
 import Section from '@components/common/Section.astro';
 
 const aboutContent = await getContent('o-nama');
@@ -12,30 +14,55 @@ const { frontmatter, content } = aboutContent;
 ---
 
 <Layout title={frontmatter.title}>
-  <Section title={frontmatter.title}>
-    <Text
-      level='body'
-      color='dark'
-      set:html={content}
-    />
-  </Section>
-
-  <Section
-    title={frontmatter.mission.title}
-    backgroundColor='bg-neutral-100'
+  <div
+    class='relative min-h-screen flex items-center justify-center p-4 pt-20 md:pt-4'
   >
-    <Text
-      level='body'
-      color='dark'
-      >{frontmatter.mission.content}</Text
-    >
-  </Section>
+    <Image
+      src={aboutBackground}
+      alt='NoDesign office background'
+      class='absolute inset-0 object-cover w-full h-full'
+      loading='eager'
+    />
+    <div class='absolute inset-0 bg-black opacity-60'></div>
 
-  <Section title={frontmatter.team.title}>
-    <Text
-      level='body'
-      color='dark'
-      >{frontmatter.team.content}</Text
+    <div
+      class='relative z-10 bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-lg p-6 md:p-8 w-full max-w-3xl'
     >
-  </Section>
+      <Text
+        level='h1'
+        color='light'
+        class='mb-6 text-center'
+        >{frontmatter.title}</Text
+      >
+
+      <Text
+        level='body'
+        color='light'
+        class='mb-8'
+        set:html={content}
+      />
+
+      <Section
+        title={frontmatter.mission.title}
+        backgroundColor='bg-transparent'
+      >
+        <Text
+          level='body'
+          color='light'
+          >{frontmatter.mission.content}</Text
+        >
+      </Section>
+
+      <Section
+        title={frontmatter.team.title}
+        backgroundColor='bg-transparent'
+      >
+        <Text
+          level='body'
+          color='light'
+          >{frontmatter.team.content}</Text
+        >
+      </Section>
+    </div>
+  </div>
 </Layout>
