@@ -1,4 +1,10 @@
 import { defineCollection, z } from 'astro:content';
+import homeSchema from './home/schema';
+
+const home = defineCollection({
+  type: 'data',
+  schema: homeSchema,
+});
 
 const services = defineCollection({
   type: 'content',
@@ -63,4 +69,5 @@ export const collections = {
   services,
   projects,
   settings,
+  home,
 };

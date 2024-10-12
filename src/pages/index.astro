@@ -7,20 +7,18 @@ import AboutSection from '@components/home/AboutSection.astro';
 import TestimonialsSection from '@components/home/TestimonialsSection.astro';
 import CtaSection from '@components/home/CtaSection.astro';
 import { getCategories } from '@utils/images';
-import { getContent } from '@utils/contentLoader';
 import CategorySection from '@components/common/CategorySection.astro';
+import { getCollection } from 'astro:content';
 
 export const prerender = true;
 
 // Fetch all necessary data at build time
 const categories = await getCategories();
-const homeContent = await getContent('home');
+const homeContent = await getCollection('home');
 
 if (!homeContent) {
   return Astro.redirect('/404');
 }
-
-const { frontmatter } = homeContent;
 
 const featuredProjects = categories
   .map((category) => ({
@@ -30,11 +28,11 @@ const featuredProjects = categories
   }))
   .filter((item) => item.project);
 
-const carouselSlides = frontmatter.carouselSlides || [];
+const homeData = homeContent[0].data;
 ---
 
 <Layout>
-  <Hero slides={carouselSlides} />
+  <Hero slides={homeData.carouselSlides} />
 
   <!-- <ServiceSection
     title={frontmatter.services.title}
@@ -54,26 +52,26 @@ const carouselSlides = frontmatter.carouselSlides || [];
   }
 
   <FeaturedProjectsSection
-    title={frontmatter.featuredProjects.title}
-    description={frontmatter.featuredProjects.description}
+    title={homeData.featuredProjects.title}
+    description={homeData.featuredProjects.description}
     featuredProjects={featuredProjects}
   />
 
   <AboutSection
-    title={frontmatter.about.title}
-    description={frontmatter.about.description}
-    cta={frontmatter.about.cta}
+    title={homeData.about.title}
+    description={homeData.about.description}
+    cta={homeData.about.cta}
   />
 
   <TestimonialsSection
-    title={frontmatter.testimonials.title}
-    testimonials={frontmatter.testimonials.items}
+    title={homeData.testimonials.title}
+    testimonials={homeData.testimonials.items}
   />
 
   <CtaSection
-    title={frontmatter.cta.title}
-    description={frontmatter.cta.description}
-    buttonText={frontmatter.cta.buttonText}
-    link={frontmatter.cta.link}
+    title={homeData.cta.title}
+    description={homeData.cta.description}
+    buttonText={homeData.cta.buttonText}
+    link={homeData.cta.link}
   />
 </Layout>
