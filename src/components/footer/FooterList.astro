@@ -11,7 +11,7 @@ interface Props {
   items: ListItem[];
 }
 
-const { title, items } = Astro.props;
+const { title, items = [] } = Astro.props;
 ---
 
 <div>

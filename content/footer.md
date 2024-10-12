@@ -1,5 +1,4 @@
 ---
-
 quickLinks:
   - text: Kancelarijski prostori
     link: /galerija/kancelarijski-prostor
@@ -13,16 +12,16 @@ quickLinks:
     link: /kontakt
 
 contactInfo:
-  - text: Email: info@nodesign.ba
-  - text: Telefon: +387 65 010 641
-  - text: Adresa: Ulica i broj, Grad
+  - text: 'Email: info@nodesign.ba'
+  - text: 'Telefon: +387 65 010 641'
+  - text: 'Adresa: Ulica i broj, Grad'
 
 socialLinks:
   - name: Facebook
-    icon: social-facebook-white
+    icon: social-facebook
     url: https://facebook.com
   - name: Instagram
-    icon: social-instagram-white
+    icon: social-instagram
     url: https://instagram.com
 ---
 
