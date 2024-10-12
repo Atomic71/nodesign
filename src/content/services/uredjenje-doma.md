@@ -1,17 +1,17 @@
 ---
-title: 'Opremanje doma'
+title: 'Uređenje doma'
 description: 'Transformišemo vaš životni prostor u oazu udobnosti i stila.'
 icon: 'home'
 order: 1
 subServices:
   - title: 'Renoviranje kupatila'
-    icon: 'bathroom'
+    icon: 'home'
   - title: 'Renoviranje kuhinje'
-    icon: 'kitchen'
+    icon: 'home'
   - title: 'Dnevni boravak'
-    icon: 'livingroom'
+    icon: 'home'
   - title: 'Spavaća soba'
-    icon: 'bedroom'
+    icon: 'home'
 ---
 
 # Opremanje doma

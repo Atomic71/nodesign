@@ -16,6 +16,8 @@ export const prerender = true;
 const categories = await getCategories();
 const homeContent = await getCollection('home');
 
+const categoriesLoaded = await getCollection('services');
+
 if (!homeContent) {
   return Astro.redirect('/404');
 }
@@ -32,23 +34,27 @@ const homeData = homeContent[0].data;
 ---
 
 <Layout>
-  <Hero slides={homeData.carouselSlides} />
+  <!-- <Hero slides={homeData.carouselSlides} /> -->
 
-  <!-- <ServiceSection
-    title={frontmatter.services.title}
-    description={frontmatter.services.description}
-    categories={categories}
-  /> -->
   {
-    categories.map((category, index) => (
-      <CategorySection
-        title={category.name}
-        description={category.description || ''}
-        image={category.projects[0]?.coverImage || '/api/placeholder/600/400'}
-        link={`/galerija/${category.slug}`}
-        reverse={index % 2 !== 0}
-      />
-    ))
+    categories.map((category, index) => {
+      const categoryData = categoriesLoaded.find((x) => {
+        return x.slug === category.slug;
+      });
+
+      return (
+        <CategorySection
+          title={categoryData?.data.title || category.name}
+          description={
+            categoryData?.data.description || 'Nema opisa za ovu kategoriju.'
+          }
+          image={category.projects[0]?.coverImage}
+          link={`/galerija/${category.slug}`}
+          reverse={index % 2 !== 0}
+          subFeatures={categoryData?.data.subServices || []}
+        />
+      );
+    })
   }
 
   <FeaturedProjectsSection

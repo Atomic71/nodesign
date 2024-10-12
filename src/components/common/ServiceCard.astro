@@ -1,11 +1,12 @@
 ---
 import Text from '@components/common/Text.astro';
 import Icon from '@components/common/Icon.astro';
+import type { IconType } from '@utils/schemas/icons';
 
 interface Props {
   title: string;
   description: string;
-  icon: string;
+  icon: IconType;
   slug: string;
 }
 

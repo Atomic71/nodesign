@@ -1,17 +1,17 @@
 ---
 title: 'Kancelarijski prostor'
 description: 'Kreiramo produktivne i inspirativne radne sredine za vaš poslovni uspjeh.'
-icon: 'office'
+icon: 'home'
 order: 2
 subServices:
   - title: 'Open Space uredi'
-    icon: 'open-space'
+    icon: 'home'
   - title: 'Sale za sastanke'
-    icon: 'meeting-room'
+    icon: 'home'
   - title: 'Recepcije'
-    icon: 'reception'
+    icon: 'home'
   - title: 'Direktorske kancelarije'
-    icon: 'executive-office'
+    icon: 'home'
 ---
 
 # Kancelarijski prostor

@@ -12,12 +12,12 @@ const services = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string(),
-    icon: z.string(),
+    icon: iconSchema,
     order: z.number().optional(),
     subServices: z.array(
       z.object({
         title: z.string(),
-        icon: z.string(),
+        icon: iconSchema,
       })
     ),
   }),

@@ -1,17 +1,17 @@
 ---
 title: 'Namještaj po mjeri'
 description: 'Kreiramo jedinstvene komade namještaja koji savršeno odgovaraju vašem prostoru i stilu.'
-icon: 'custom-furniture'
+icon: 'home'
 order: 3
 subServices:
   - title: 'Garderoberi'
-    icon: 'wardrobe'
+    icon: 'home'
   - title: 'Kuhinje po mjeri'
-    icon: 'custom-kitchen'
+    icon: 'home'
   - title: 'Police i skladišni prostor'
-    icon: 'storage'
+    icon: 'home'
   - title: 'Specijalni komadi namještaja'
-    icon: 'unique-furniture'
+    icon: 'home'
 ---
 
 # Namještaj po mjeri

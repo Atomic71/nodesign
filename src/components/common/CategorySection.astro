@@ -2,6 +2,8 @@
 import Section from '@components/common/Section.astro';
 import Text from '@components/common/Text.astro';
 import Thumbnail from '@components/common/Thumbnail.astro';
+import type { IconType } from '@utils/schemas/icons';
+import Icon from './Icon.astro';
 
 interface Props {
   title: string;
@@ -9,41 +11,73 @@ interface Props {
   image: string;
   link: string;
   reverse?: boolean;
+  subFeatures: {
+    title: string;
+    icon: IconType;
+  }[];
 }
 
-const { title, description, image, link, reverse = false } = Astro.props;
+const {
+  title,
+  description,
+  image,
+  link,
+  reverse = false,
+  subFeatures,
+} = Astro.props;
 ---
 
 <Section>
   <div
-    class={`flex flex-col ${reverse ? 'md:flex-row-reverse' : 'md:flex-row'} items-start gap-8`}
+    class={`grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch ${reverse ? 'md:grid-flow-dense' : ''}`}
   >
-    <div class='w-full md:w-1/2'>
+    <div class='col-span-1'>
       <Thumbnail
         image={image}
-        title={title}
+        title={''}
         description=''
         link={link}
       />
     </div>
-    <div class='w-full md:w-1/2'>
-      <Text
-        level='h2'
-        color='primary'
-        class='mb-4'
-        >{title}</Text
-      >
-      <Text
-        level='body'
-        color='dark'
-        class='mb-6'
-        >{description}</Text
-      >
+    <div class='col-span-1 flex flex-col justify-between'>
+      <div>
+        <Text
+          level='h2'
+          color='primary'
+          class='mb-4'
+          >{title}</Text
+        >
+        <Text
+          level='body'
+          themed
+          class='mb-6'
+          >{description}</Text
+        >
+
+        <div class='flex flex-col gap-4'>
+          {
+            subFeatures.map((feature) => (
+              <div class='flex items-center gap-2'>
+                <Icon
+                  name={'chevron-right'}
+                  height={20}
+                />
+                <Text
+                  level='small'
+                  themed={false}
+                >
+                  {feature.title}
+                </Text>
+              </div>
+            ))
+          }
+        </div>
+      </div>
       <a
         href={link}
-        class='inline-block bg-primary hover:bg-primary-dark text-white font-bold py-2 px-4 rounded transition duration-300'
+        class='flex items-center justify-end'
       >
-        Saznajte više
+        Saznajte više <Icon name='chevron-right' />
       </a>
     </div>
   </div>
