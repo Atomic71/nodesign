@@ -1,17 +1,20 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { getContent } from '../utils/contentLoader';
 import { Image } from 'astro:assets';
 import contactBackground from '../assets/photos/kancelarija-2.jpg';
 import Text from '@components/common/Text.astro';
 import Icon from '@components/common/Icon.astro';
+import { getCollection } from 'astro:content';
 
 export const prerender = true;
-const contactContent = await getContent('contact');
-if (!contactContent) {
+const contactContent = await getCollection('contact');
+const settingsContent = await getCollection('settings');
+if (!contactContent || !settingsContent) {
   return Astro.redirect('/404');
 }
-const { frontmatter, content } = contactContent;
+
+const contactContentData = contactContent[0];
+const settingsContentData = settingsContent[0];
 ---
 
 <Layout title='Kontakt | NoDesign'>
@@ -25,76 +28,57 @@ const { frontmatter, content } = contactContent;
       loading='eager'
     />
     <div class='absolute inset-0 bg-black opacity-60'></div>
-
-    <div
-      class='relative z-10 bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-lg p-6 md:p-8 w-full max-w-md'
-    >
+    <div class='absolute inset-0 container flex flex-col pt-40'>
       <Text
         level='h1'
         color='light'
-        class='mb-4 md:mb-6 text-center text-2xl md:text-3xl'
-        >Kontaktirajte nas</Text
+        class='mb-4'
+        >{contactContentData.data.title}</Text
       >
-
-      <Text
-        level='body'
-        color='light'
-        class='mb-6 md:mb-8 text-center text-sm md:text-base'
-        >{content}</Text
-      >
-
-      <form class='space-y-4'>
-        <input
-          type='text'
-          placeholder='Ime i prezime'
-          class='w-full p-2 bg-white bg-opacity-20 rounded placeholder-gray-300 text-white text-sm md:text-base'
-          required
-        />
-        <input
-          type='email'
-          placeholder='Email adresa'
-          class='w-full p-2 bg-white bg-opacity-20 rounded placeholder-gray-300 text-white text-sm md:text-base'
-          required
-        />
-        <textarea
-          placeholder='Vaša poruka'
-          rows='4'
-          class='w-full p-2 bg-white bg-opacity-20 rounded placeholder-gray-300 text-white text-sm md:text-base'
-          required
-        ></textarea>
-        <button
-          type='submit'
-          class='w-full bg-primary hover:bg-primary-dark text-white font-bold py-2 px-4 rounded transition duration-300 text-sm md:text-base'
+      <div>
+        <Text
+          level='body'
+          color='light'
+          class='mb-10'
+          >{contactContentData.data.description}</Text
         >
-          Pošalji poruku
-        </button>
-      </form>
+      </div>
 
-      <div class='mt-6 md:mt-8 flex justify-center space-x-4'>
-        <a
-          href='https://facebook.com'
-          target='_blank'
-          rel='noopener noreferrer'
-          class='text-white hover:text-primary transition duration-300'
-        >
-          <Icon
-            name='social-facebook'
-            width={20}
-            height={20}
-          />
-        </a>
-        <a
-          href='https://instagram.com'
-          target='_blank'
-          rel='noopener noreferrer'
-          class='text-white hover:text-primary transition duration-300'
-        >
-          <Icon
-            name='social-instagram'
-            width={20}
-            height={20}
-          />
-        </a>
+      <div class='mt-6 md:mt-8 flex flex-col gap-3'>
+        {
+          settingsContentData.data.contactInfo.map((socialMedia) => (
+            <a
+              href={socialMedia.link}
+              target='_blank'
+              rel='noopener noreferrer'
+              class='contact-link'
+            >
+              <Icon
+                name={socialMedia.icon}
+                width={20}
+                height={20}
+              />
+              <span>{socialMedia.label}</span>
+            </a>
+          ))
+        }
+        {
+          settingsContentData.data.socialMedia.map((socialMedia) => (
+            <a
+              href={socialMedia.url}
+              target='_blank'
+              rel='noopener noreferrer'
+              class='contact-link'
+            >
+              <Icon
+                name={socialMedia.icon}
+                width={20}
+                height={20}
+              />
+              <span>{socialMedia.description}</span>
+            </a>
+          ))
+        }
       </div>
     </div>
   </div>
@@ -105,5 +89,9 @@ const { frontmatter, content } = contactContent;
     .min-h-screen {
       min-height: calc(100vh + 4rem);
     }
+  }
+
+  .contact-link {
+    @apply text-white hover:text-primary hover:fill-primary transition duration-300 flex items-center text-xl gap-2 bg-primary hover:bg-white p-3 max-w-[400px];
   }
 </style>

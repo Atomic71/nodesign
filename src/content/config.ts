@@ -1,5 +1,6 @@
 import { defineCollection, z } from 'astro:content';
 import homeSchema from './home/schema';
+import { iconSchema } from '@utils/schemas/icons';
 
 const home = defineCollection({
   type: 'data',
@@ -46,7 +47,8 @@ const settings = defineCollection({
       z.object({
         platform: z.string(),
         url: z.string().url(),
-        icon: z.string(),
+        icon: iconSchema,
+        description: z.string(),
       })
     ),
     navigation: z.array(
@@ -59,9 +61,17 @@ const settings = defineCollection({
       z.object({
         label: z.string(),
         link: z.string(),
-        icon: z.string(),
+        icon: iconSchema,
       })
     ),
+  }),
+});
+
+const contact = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
   }),
 });
 
@@ -70,4 +80,5 @@ export const collections = {
   projects,
   settings,
   home,
+  contact,
 };

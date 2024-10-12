@@ -5,16 +5,13 @@ import NodeDesignBrand from '@assets/icons/nodesign-brand.svg?raw';
 import SocialFacebook from '@assets/icons/social-facebook.svg?raw';
 import SocialInstagram from '@assets/icons/social-instagram.svg?raw';
 import Home from '@assets/icons/home.svg?raw';
+import Email from '@assets/icons/email.svg?raw';
+import Phone from '@assets/icons/phone.svg?raw';
 import ChevronRight from '@assets/icons/chevron-right.svg?raw';
+import type { IconType } from '@utils/schemas/icons';
 
-type IconName =
-  | 'nodesign-brand'
-  | 'social-facebook'
-  | 'social-instagram'
-  | 'home'
-  | 'chevron-right';
 export interface Props {
-  name: IconName;
+  name: IconType;
   class?: string;
   width?: number;
   height?: number;
@@ -30,12 +27,14 @@ const {
   ...attributes
 } = Astro.props;
 
-const icons: Record<IconName, string> = {
+const icons: Record<IconType, string> = {
   'nodesign-brand': NodeDesignBrand,
   'social-instagram': SocialInstagram,
   'social-facebook': SocialFacebook,
   home: Home,
   'chevron-right': ChevronRight,
+  email: Email,
+  phone: Phone,
 };
 ---
 

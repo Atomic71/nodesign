@@ -9,13 +9,15 @@
   "socialMedia": [
     {
       "platform": "Facebook",
-      "url": "https://facebook.com/nodesign",
-      "icon": "facebook"
+      "url": "https://www.facebook.com/nodesignbih/",
+      "icon": "social-facebook",
+      "description": "Pratite nas na Facebooku"
     },
     {
       "platform": "Instagram",
-      "url": "https://instagram.com/nodesign",
-      "icon": "instagram"
+      "url": "https://www.instagram.com/no_design_bih/",
+      "icon": "social-instagram",
+      "description": "Pratite nas na Instagramu"
     }
   ],
   "navigation": [
@@ -46,11 +48,6 @@
       "label": "Telefon: +387 65 010 641",
       "link": "tel:+38765010641",
       "icon": "phone"
-    },
-    {
-      "label": "Adresa: Ulica i broj, Grad",
-      "link": "https://goo.gl/maps/yourGoogleMapsLink",
-      "icon": "map-pin"
     }
   ]
 }
