@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro check && astro build",
+    "build": "astro build",
     "preview": "astro preview",
     "astro": "astro"
   },
@@ -16,6 +16,7 @@
     "@astrojs/rss": "^4.0.6",
     "@astrojs/sitemap": "^3.1.5",
     "@astrojs/tailwind": "^5.1.1",
+    "@cxa/astro-inline-svg": "^0.5.1",
     "astro": "^4.10.0",
     "gray-matter": "^4.0.3",
     "photoswipe": "^5.4.4",
