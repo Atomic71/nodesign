@@ -10,12 +10,12 @@ const menuItems = [
 const socialLinks = [
   {
     name: 'Facebook',
-    icon: 'social-facebook-dark',
+    icon: 'social-facebook',
     url: 'https://facebook.com',
   },
   {
     name: 'Instagram',
-    icon: 'social-instagram-dark',
+    icon: 'social-instagram',
     url: 'https://instagram.com',
   },
 ] as const;
@@ -27,11 +27,16 @@ const socialLinks = [
 >
   <div class='flex flex-col h-full justify-between py-20 px-8'>
     <nav class='flex-grow flex items-center justify-center'>
-      <ul class='text-center'>
+      <ul class='text-center text-text-light dark:text-text-dark'>
         {
           menuItems.map((item) => (
             <li class='mb-8'>
-              <a href={item.href}>{item.text}</a>
+              <a
+                class='text-text-light dark:text-text-dark text-2xl'
+                href={item.href}
+              >
+                {item.text}
+              </a>
             </li>
           ))
         }
@@ -60,6 +65,13 @@ const socialLinks = [
   </div>
 </div>
 
+<script>
+  import { toggleThemeProcedure } from '../../utils/themeToggle.ts';
+
+  const themeToggleBtn = document.getElementById('mobile-header');
+
+  themeToggleBtn?.addEventListener('click', toggleThemeProcedure);
+</script>
 <style>
   body.menu-open {
     overflow: hidden;

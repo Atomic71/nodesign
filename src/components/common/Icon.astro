@@ -1,11 +1,12 @@
 ---
 import { Image } from 'astro:assets';
+import Svg from '@cxa/astro-inline-svg';
 
-type ThemedIcons = 'nodesign-brand' | 'social-facebook' | 'social-instagram';
-type ThemedIcon = `${ThemedIcons}-${'light' | 'dark'}`;
+import NodeDesignBrand from '@assets/icons/nodesign-brand.svg?raw';
+import SocialFacebook from '@assets/icons/social-facebook.svg?raw';
+import SocialInstagram from '@assets/icons/social-instagram.svg?raw';
 
-type IconName = ThemedIcon;
-type IconPath = `/icons/${IconName}.svg`;
+type IconName = 'nodesign-brand' | 'social-facebook' | 'social-instagram';
 export interface Props {
   name: IconName;
   class?: string;
@@ -14,23 +15,27 @@ export interface Props {
   id?: string;
 }
 
-const { name, class: className, width = 24, height = 24, id } = Astro.props;
+const {
+  name,
+  class: className,
+  width = 24,
+  height = 'auto',
+  id,
+  ...attributes
+} = Astro.props;
 
-const icons: Record<IconName, IconPath> = {
-  'nodesign-brand-light': '/icons/nodesign-brand-light.svg',
-  'nodesign-brand-dark': '/icons/nodesign-brand-dark.svg',
-  'social-instagram-light': '/icons/social-instagram-light.svg',
-  'social-facebook-light': '/icons/social-facebook-light.svg',
-  'social-instagram-dark': '/icons/social-instagram-dark.svg',
-  'social-facebook-dark': '/icons/social-facebook-dark.svg',
+const icons: Record<IconName, string> = {
+  'nodesign-brand': NodeDesignBrand,
+  'social-instagram': SocialInstagram,
+  'social-facebook': SocialFacebook,
 };
 ---
 
-<Image
-  id={id ?? name}
-  src={icons[name]}
-  alt={name.replace(/-/g, ' ')}
+<Svg
   class={className}
+  raw={icons[name]}
   width={width}
   height={height}
+  id={id}
+  {...attributes}
 />

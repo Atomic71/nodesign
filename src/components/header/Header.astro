@@ -6,23 +6,16 @@ import ThemeToggle from '@components/common/ThemeToggle.astro';
 ---
 
 <header
-  class='fixed top-0 left-0 right-0 z-50 transition-all duration-300'
+  class:list={['fixed top-0 left-0 right-0 z-50 transition-all duration-300']}
   id='main-header'
 >
-  <nav class='mx-auto px-10 py-10'>
+  <nav class='mx-auto px-10 py-3'>
     <div class='flex justify-between items-center'>
       <a href={`/`}>
         <Icon
-          name='nodesign-brand-dark'
+          name='nodesign-brand'
           width={200}
-          class='text-current dark:hidden'
-          id='nodesign-brand-logo-dark'
-        />
-        <Icon
-          name='nodesign-brand-light'
-          width={200}
-          class='text-current'
-          id='nodesign-brand-logo-light'
+          id='nodesign-brand-logo'
         />
       </a>
 
@@ -59,11 +52,9 @@ import ThemeToggle from '@components/common/ThemeToggle.astro';
   html.dark #main-header.scrolled {
     @apply bg-background-dark shadow-md;
   }
+
   html:not(.dark) #main-header {
     &:not(.scrolled) {
-      #nodesign-brand-logo-dark {
-        @apply hidden;
-      }
       #main-header-toggle {
         @apply hidden;
 
@@ -74,11 +65,8 @@ import ThemeToggle from '@components/common/ThemeToggle.astro';
       }
     }
     &.scrolled {
-      #nodesign-brand-logo-light {
-        @apply hidden;
-      }
-      #nodesign-brand-logo-dark {
-        @apply block;
+      #nodesign-brand-logo {
+        @apply text-text-light;
       }
       @apply bg-white  dark:bg-background-dark shadow-md;
 
@@ -95,7 +83,6 @@ import ThemeToggle from '@components/common/ThemeToggle.astro';
         }
       }
     }
-    @apply text-black;
   }
 </style>
 
@@ -106,7 +93,6 @@ import ThemeToggle from '@components/common/ThemeToggle.astro';
 
   themeToggleBtn?.addEventListener('click', toggleThemeProcedure);
 </script>
-
 <script>
   const header = document.getElementById('main-header');
   const scrollThreshold = 150;
@@ -119,6 +105,11 @@ import ThemeToggle from '@components/common/ThemeToggle.astro';
     }
   }
 
+  document.addEventListener('astro:page-load', () => {
+    console.log('Page loaded!');
+    // This runs on first page load and after every navigation.
+    updateHeaderBackground(); // e.g. add event listeners
+  });
   window.addEventListener('scroll', updateHeaderBackground);
   updateHeaderBackground();
 </script>
