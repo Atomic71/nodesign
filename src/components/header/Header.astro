@@ -3,6 +3,9 @@ import MobileMenuToggle from './MobileMenuToggle.astro';
 import MobileMenu from './MobileMenu.astro';
 import Icon from '@components/common/Icon.astro';
 import ThemeToggle from '@components/common/ThemeToggle.astro';
+import { getCollection } from 'astro:content';
+
+const settings = await getCollection('settings');
 ---
 
 <header
@@ -21,16 +24,16 @@ import ThemeToggle from '@components/common/ThemeToggle.astro';
 
       <!-- Desktop Navigation -->
       <div class='hidden md:flex space-x-8 items-center'>
-        <a
-          class='text-2xl'
-          href={`/o-nama`}
-          >O nama</a
-        >
-        <a
-          class='text-2xl'
-          href={`/kontakt`}
-          >Kontakt</a
-        >
+        {
+          settings[0].data.navigation.map((navItem) => (
+            <a
+              href={navItem.url}
+              class='text-lg font-semibold'
+            >
+              {navItem.label}
+            </a>
+          ))
+        }
         <ThemeToggle key='main-header-toggle' />
       </div>
 
@@ -92,12 +95,10 @@ import ThemeToggle from '@components/common/ThemeToggle.astro';
   const themeToggleBtn = document.getElementById('main-header-toggle');
 
   themeToggleBtn?.addEventListener('click', toggleThemeProcedure);
-</script>
-<script>
-  const header = document.getElementById('main-header');
-  const scrollThreshold = 150;
 
   function updateHeaderBackground() {
+    const header = document.getElementById('main-header');
+    const scrollThreshold = 150;
     if (window.scrollY > scrollThreshold) {
       header?.classList.add('scrolled');
     } else {
@@ -106,10 +107,8 @@ import ThemeToggle from '@components/common/ThemeToggle.astro';
   }
 
   document.addEventListener('astro:page-load', () => {
-    console.log('Page loaded!');
-    // This runs on first page load and after every navigation.
+    console.log('Page loaded');
     updateHeaderBackground(); // e.g. add event listeners
+    window.addEventListener('scroll', updateHeaderBackground);
   });
-  window.addEventListener('scroll', updateHeaderBackground);
-  updateHeaderBackground();
 </script>
