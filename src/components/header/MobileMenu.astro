@@ -1,24 +1,12 @@
 ---
 import Icon from '@components/common/Icon.astro';
 import ThemeToggle from '@components/common/ThemeToggle.astro';
+import { getCollection } from 'astro:content';
 
-const menuItems = [
-  { href: '/o-nama', text: 'O nama' },
-  { href: '/kontakt', text: 'Kontakt' },
-];
+const settingsData = await getCollection('settings');
 
-const socialLinks = [
-  {
-    name: 'Facebook',
-    icon: 'social-facebook',
-    url: 'https://facebook.com',
-  },
-  {
-    name: 'Instagram',
-    icon: 'social-instagram',
-    url: 'https://instagram.com',
-  },
-] as const;
+const menuItems = settingsData[0].data.navigation;
+const socialLinks = settingsData[0].data.socialMedia;
 ---
 
 <div
@@ -33,9 +21,9 @@ const socialLinks = [
             <li class='mb-8'>
               <a
                 class='text-text-light dark:text-text-dark text-2xl'
-                href={item.href}
+                href={item.url}
               >
-                {item.text}
+                {item.label}
               </a>
             </li>
           ))
