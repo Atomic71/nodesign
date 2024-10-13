@@ -18,19 +18,17 @@ const {
 } = Astro.props;
 ---
 
-<section class:list={[backgroundColor, 'py-16', className]}>
-  <div class='container'>
-    {
-      title && (
-        <Text
-          level={titleLevel}
-          themed
-          class='mb-8'
-        >
-          {title}
-        </Text>
-      )
-    }
-    <slot />
-  </div>
+<section class:list={[backgroundColor, 'py-16', className, 'container']}>
+  {
+    title && (
+      <Text
+        level={titleLevel}
+        themed
+        class='mb-8'
+      >
+        {title}
+      </Text>
+    )
+  }
+  <slot />
 </section>

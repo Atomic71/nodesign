@@ -1,14 +1,8 @@
 ---
-import Layout from '@layouts/Layout.astro';
-import Section from '@components/common/Section.astro';
-import Text from '@components/common/Text.astro';
-import Breadcrumb from '@components/common/Breadcrumb.astro';
-import { getCategories } from '@utils/images';
-import { getContent } from '@utils/contentLoader';
-import type { CategoryInfo, ProjectInfo } from '@utils/images';
-import 'photoswipe/style.css';
-import { getCollection } from 'astro:content';
 import SecondaryPage from '@components/common/SecondaryPage.astro';
+import type { CategoryInfo, ProjectInfo } from '@utils/images';
+import { getCategories } from '@utils/images';
+import 'photoswipe/style.css';
 
 export const prerender = true;
 

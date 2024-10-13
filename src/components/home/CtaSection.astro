@@ -1,6 +1,5 @@
 ---
-import Section from '@components/common/Section.astro';
-import Text from '@components/common/Text.astro';
+import Section from '@components/common/HomeSection.astro';
 
 interface Props {
   title: string;
@@ -9,7 +8,7 @@ interface Props {
   link: string;
 }
 
-const { title, description, buttonText, link } = Astro.props;
+const { title, buttonText, link } = Astro.props;
 ---
 
 <Section

@@ -1,13 +1,12 @@
 ---
 import Layout from '@layouts/Layout.astro';
 import Hero from '@components/home/Hero.astro';
-import ServiceSection from '@components/home/ServiceSection.astro';
 import FeaturedProjectsSection from '@components/home/FeaturedProjectsSection.astro';
 import AboutSection from '@components/home/AboutSection.astro';
 import TestimonialsSection from '@components/home/TestimonialsSection.astro';
+import ServicesSection from '@components/home/ServicesSection.astro';
 import CtaSection from '@components/home/CtaSection.astro';
 import { getCategories } from '@utils/images';
-import CategorySection from '@components/common/CategorySection.astro';
 import { getCollection } from 'astro:content';
 
 export const prerender = true;
@@ -15,8 +14,6 @@ export const prerender = true;
 // Fetch all necessary data at build time
 const categories = await getCategories();
 const homeContent = await getCollection('home');
-
-const categoriesLoaded = await getCollection('services');
 
 if (!homeContent) {
   return Astro.redirect('/404');
@@ -35,28 +32,11 @@ const homeData = homeContent[0].data;
 
 <Layout>
   <Hero slides={homeData.carouselSlides} />
-
-  {
-    categories.map((category, index) => {
-      const categoryData = categoriesLoaded.find((x) => {
-        return x.slug === category.slug;
-      });
-
-      return (
-        <CategorySection
-          title={categoryData?.data.title || category.name}
-          description={
-            categoryData?.data.description || 'Nema opisa za ovu kategoriju.'
-          }
-          image={category.projects[0]?.coverImage}
-          link={`/usluge/${category.slug}`}
-          reverse={index % 2 !== 0}
-          subFeatures={categoryData?.data.subServices || []}
-        />
-      );
-    })
-  }
-
+  <ServicesSection
+    title={homeData.services.title}
+    description={homeData.services.description}
+    categories={categories}
+  />
   <FeaturedProjectsSection
     title={homeData.featuredProjects.title}
     description={homeData.featuredProjects.description}

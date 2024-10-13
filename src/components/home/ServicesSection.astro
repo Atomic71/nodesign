@@ -1,0 +1,41 @@
+---
+import CategorySection from '@components/common/CategorySection.astro';
+import Section from '@components/common/HomeSection.astro';
+import type { CategoryInfo } from '../../utils/images';
+import { getCollection } from 'astro:content';
+
+interface Props {
+  title: string;
+  categories: CategoryInfo[];
+}
+
+const { title, categories } = Astro.props;
+const categoriesLoaded = await getCollection('services');
+---
+
+<Section
+  title={title}
+  backgroundColor='bg-background-light dark:bg-background-dark'
+>
+  {
+    categories.map((category, index) => {
+      const categoryData = categoriesLoaded.find((x) => {
+        return x.slug === category.slug;
+      });
+
+      return (
+        <CategorySection
+          title={categoryData?.data.title || category.name}
+          description={
+            categoryData?.data.description || 'Nema opisa za ovu kategoriju.'
+          }
+          image={category.projects[0]?.coverImage}
+          link={`/usluge/${category.slug}`}
+          reverse={index % 2 !== 0}
+          subFeatures={categoryData?.data.subServices || []}
+          isLast={index === categories.length - 1}
+        />
+      );
+    })
+  }
+</Section>

@@ -1,13 +1,8 @@
 ---
-import Layout from '@layouts/Layout.astro';
-import Thumbnail from '@components/common/Thumbnail.astro';
-import Breadcrumb from '@components/common/Breadcrumb.astro';
-import { getCategories } from '../../utils/images';
-import { getContent } from '../../utils/contentLoader';
-import type { CategoryInfo } from '../../utils/images';
-import Text from '@components/common/Text.astro';
-import Section from '@components/common/Section.astro';
 import SecondaryPage from '@components/common/SecondaryPage.astro';
+import Thumbnail from '@components/common/Thumbnail.astro';
+import { getContent } from '../../utils/contentLoader';
+import { getCategories } from '../../utils/images';
 
 export const prerender = true;
 
