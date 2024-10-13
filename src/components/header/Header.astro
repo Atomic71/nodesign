@@ -68,6 +68,16 @@ const { regularHeader = false } = Astro.props;
     @apply bg-background-dark shadow-md;
   }
 
+  html #main-header:not(.scrolled) {
+    #main-header-toggle {
+      @apply hidden;
+      svg#main-header-toggle-light,
+      svg#main-header-toggle-dark {
+        @apply hidden;
+      }
+    }
+  }
+
   html:not(.dark) #main-header {
     &:not(.scrolled) {
       #main-header-toggle {
