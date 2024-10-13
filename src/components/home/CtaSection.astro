@@ -20,7 +20,7 @@ const { title, buttonText, link } = Astro.props;
   <div class='flex justify-center'>
     <a
       href={link}
-      class='btn font-bold py-2 px-4 rounded transition'
+      class='btn font-bold py-2 px-4 rounded'
     >
       {buttonText}
     </a>
@@ -29,6 +29,6 @@ const { title, buttonText, link } = Astro.props;
 
 <style>
   .btn {
-    @apply bg-accent-dark dark:bg-accent-light hover:bg-neutral-100 dark:hover:bg-background-light dark:hover:text-text-light text-primary dark:text-secondary-dark;
+    @apply bg-accent-light hover:bg-accent-dark text-text-light  hover:text-text-dark;
   }
 </style>

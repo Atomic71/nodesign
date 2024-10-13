@@ -1,9 +1,9 @@
 ---
 export type TextLevel = 'h1' | 'h2' | 'h3' | 'h4' | 'body' | 'small';
-
+export type TextColor = 'primary' | 'secondary' | 'accent' | 'light' | 'dark';
 export interface Props {
   level: TextLevel;
-  color?: 'primary' | 'secondary' | 'accent' | 'light' | 'dark';
+  color?: TextColor;
   themed?: boolean;
   class?: string;
   asSpan?: boolean;

@@ -1,10 +1,13 @@
 ---
-import Text from '@components/common/Text.astro';
+import Text, {
+  type TextColor,
+  type TextLevel,
+} from '@components/common/Text.astro';
 
 interface Props {
   title?: string;
-  titleLevel?: 'h1' | 'h2' | 'h3';
-  titleColor?: 'primary' | 'secondary' | 'accent' | 'light' | 'dark';
+  titleLevel?: TextLevel;
+  titleColor?: TextColor;
   backgroundColor?: string;
   class?: string;
   centerText?: boolean;
@@ -13,7 +16,7 @@ interface Props {
 const {
   title,
   titleLevel = 'h2',
-  titleColor = 'primary',
+  titleColor = undefined,
   backgroundColor = 'bg-background-light dark:bg-background-dark',
   class: className,
   centerText = false,
@@ -26,7 +29,7 @@ const {
       title && (
         <Text
           level={titleLevel}
-          themed
+          color={titleColor}
           class:list={[
             'mb-8',
             {
