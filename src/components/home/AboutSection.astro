@@ -1,6 +1,9 @@
 ---
 import Section from '@components/common/Section.astro';
 import Text from '@components/common/Text.astro';
+import { Image } from 'astro:assets';
+import kancelarija from '@assets/photos/kancelarija-2.jpg';
+import Icon from '@components/common/Icon.astro';
 
 interface Props {
   title: string;
@@ -15,19 +18,29 @@ const { title, description, cta } = Astro.props;
   title={title}
   backgroundColor='bg-background-light dark:bg-background-dark'
 >
-  <Text
-    level='body'
-    color='dark'
-    class='text-center mb-8'
-  >
-    {description}
-  </Text>
-  <div class='flex justify-center'>
-    <a
-      href='/o-nama'
-      class='bg-primary hover:bg-primary-dark text-white font-bold py-2 px-4 rounded transition duration-300'
-    >
-      {cta}
-    </a>
+  <div class='grid grid-cols-2 gap-4'>
+    <div class='flex flex-col justify-between'>
+      <Text
+        level='body'
+        themed
+        class='mb-8'
+      >
+        {description}
+      </Text>
+      <a
+        href='/o-nama'
+        class='self-end flex items-center justify-end'
+      >
+        {cta}
+        <Icon name='chevron-right' />
+      </a>
+    </div>
+    <div class='flex flex-col justify-end self-end gap-4'>
+      <Image
+        src={kancelarija}
+        alt='About us'
+        class='w-full h-auto'
+      />
+    </div>
   </div>
 </Section>

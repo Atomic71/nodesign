@@ -37,8 +37,9 @@ const { key } = Astro.props;
 
 <script>
   import { toggleThemeProcedure } from '@utils/themeToggle';
-
-  document
-    .getElementById('main-header-toggle')
-    ?.addEventListener('click', toggleThemeProcedure);
+  document.addEventListener('astro:page-load', () => {
+    document
+      .getElementById('main-header-toggle')
+      ?.addEventListener('click', toggleThemeProcedure);
+  });
 </script>
