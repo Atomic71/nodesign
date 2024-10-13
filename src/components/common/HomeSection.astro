@@ -33,11 +33,10 @@ const {
               'text-center': centerText,
             },
           ]}
-        >
-          {title}
-        </Text>
+          label={title}
+        />
       )
     }
+    <slot />
   </div>
-  <slot />
 </section>
