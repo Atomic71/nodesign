@@ -11,6 +11,7 @@ interface Props {
   backgroundColor?: string;
   class?: string;
   centerText?: boolean;
+  leftOnMobile?: boolean;
 }
 
 const {
@@ -20,6 +21,7 @@ const {
   backgroundColor = 'bg-background-light dark:bg-background-dark',
   class: className,
   centerText = false,
+  leftOnMobile = true,
 } = Astro.props;
 ---
 
@@ -33,7 +35,8 @@ const {
           class:list={[
             'mb-8',
             {
-              'text-center': centerText,
+              'md:text-center': centerText,
+              'md:text-left': leftOnMobile,
             },
           ]}
           label={title}

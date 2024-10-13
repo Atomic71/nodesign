@@ -1,5 +1,5 @@
 ---
-import Section from '@components/common/HomeSection.astro';
+import HomeSection from '@components/common/HomeSection.astro';
 import Text from '@components/common/Text.astro';
 import { Image } from 'astro:assets';
 import kancelarija from '@assets/photos/kancelarija-2.jpg';
@@ -14,8 +14,9 @@ interface Props {
 const { title, description, cta } = Astro.props;
 ---
 
-<Section
+<HomeSection
   title={title}
+  centerText
   backgroundColor='bg-background-light dark:bg-background-dark'
 >
   <div class='grid md:grid-cols-2 gap-4'>
@@ -39,8 +40,9 @@ const { title, description, cta } = Astro.props;
       <Image
         src={kancelarija}
         alt='About us'
+        quality='low'
         class='w-full h-auto'
       />
     </div>
   </div>
-</Section>
+</HomeSection>
