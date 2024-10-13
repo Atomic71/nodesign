@@ -1,9 +1,9 @@
 ---
-import Section from '@components/common/HomeSection.astro';
 import Text from '@components/common/Text.astro';
 import Thumbnail from '@components/common/Thumbnail.astro';
 import type { IconType } from '@utils/schemas/icons';
 import Icon from './Icon.astro';
+import Link from './Link.astro';
 
 interface Props {
   title: string;
@@ -33,7 +33,7 @@ const {
   class:list={[
     'grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch',
     {
-      'mb-16': !isLast,
+      'mb-8 md:mb-28': !isLast,
     },
   ]}
 >
@@ -51,9 +51,11 @@ const {
               <Icon
                 name={'chevron-right'}
                 height={20}
+                class='text-text-dark'
               />
               <Text
                 level='body'
+                color='light'
                 label={feature.title}
               />
             </div>
@@ -68,20 +70,20 @@ const {
         level='h2'
         color='primary'
         class='mb-4'
-        >{title}</Text
-      >
+        label={title}
+      />
       <Text
         level='body'
         themed
         class='mb-6'
-        >{description}</Text
-      >
+        label={description}
+      />
     </div>
-    <a
+    <Link
       href={link}
-      class='flex items-center justify-end'
-    >
-      Saznajte više <Icon name='chevron-right' />
-    </a>
+      icon='chevron-right'
+      iconRight
+      label='Saznajte više'
+    />
   </div>
 </div>
