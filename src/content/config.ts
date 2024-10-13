@@ -93,7 +93,7 @@ const contact = defineCollection({
 
 export const collections = {
   services,
-  projects,
+  // projects,
   settings,
   home,
   contact,

@@ -1,6 +1,5 @@
 ---
 import SecondaryPage from '@components/common/SecondaryPage.astro';
-import Section from '@components/common/Section.astro';
 import Text from '@components/common/Text.astro';
 import { getCollection } from 'astro:content';
 
@@ -14,7 +13,7 @@ const aboutData = aboutContent[0];
 
 <SecondaryPage
   title={aboutData.data.title}
-  description={aboutData.data.description}
+  description={''}
   breadcrumbs={[
     { label: 'Početna', href: '/' },
     { label: 'O nama', href: '/o-nama' },
