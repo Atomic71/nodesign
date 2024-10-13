@@ -35,7 +35,7 @@ const projects = defineCollection({
 });
 
 const about = defineCollection({
-  type: 'data',
+  type: 'content',
   schema: z.object({
     title: z.string(),
     mission: z.object({
