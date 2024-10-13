@@ -1,12 +1,40 @@
 ---
-const { href, text } = Astro.props;
+import type { IconType } from 'collected_files/icons';
+import Icon from './Icon.astro';
+import Text, { type TextLevel } from './Text.astro';
+
+interface Props {
+  label?: string;
+  level?: TextLevel;
+  icon?: IconType;
+  href?: string;
+}
+
+const { label, icon, href } = Astro.props;
 ---
 
 <a
   href={href}
-  target='_blank'
-  rel='noopener noreferrer'
-  class='text-text-light dark:text-text-dark hover:text-primary dark:hover:text-primary-light transition-colors'
+  class:list={[
+    {
+      'flex items-center gap-2': !!icon,
+    },
+  ]}
 >
-  {text}
+  {
+    icon && (
+      <Icon
+        name={icon}
+        width={24}
+        height={24}
+      />
+    )
+  }
+  <Text
+    level='body'
+    themed
+    asSpan
+  >
+    {label}
+  </Text>
 </a>

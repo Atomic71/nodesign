@@ -1,25 +1,39 @@
 ---
+export type TextLevel = 'h1' | 'h2' | 'h3' | 'h4' | 'body' | 'small';
+
 export interface Props {
-  level: 'h1' | 'h2' | 'h3' | 'body' | 'small';
+  level: TextLevel;
   color?: 'primary' | 'secondary' | 'accent' | 'light' | 'dark';
   themed?: boolean;
   class?: string;
+  asSpan?: boolean;
+  label?: string;
 }
 
-const { level, color, themed = true, class: className } = Astro.props;
+const {
+  level,
+  label,
+  color,
+  themed = true,
+  class: className,
+  asSpan,
+} = Astro.props;
 
 const tagMap = {
   h1: 'h1',
   h2: 'h2',
   h3: 'h3',
+  h4: 'h4',
   body: 'p',
   small: 'p',
+  span: 'span',
 };
 
 const sizeMap = {
   h1: 'text-4xl md:text-5xl font-bold font-display',
   h2: 'text-3xl md:text-4xl font-semibold font-display',
   h3: 'text-2xl md:text-3xl font-medium font-display',
+  h4: 'text-xl md:text-xl font-medium font-display',
   body: 'text-base md:text-lg font-sans',
   small: 'text-sm md:text-base font-sans',
 };
@@ -40,7 +54,7 @@ const themedColorMap = {
   dark: 'text-text-light',
 };
 
-const Tag = tagMap[level];
+const Tag = asSpan ? 'span' : tagMap[level];
 const sizeClass = sizeMap[level];
 const colorClass = color
   ? themed
@@ -52,5 +66,6 @@ const colorClass = color
 ---
 
 <Tag class:list={[sizeClass, colorClass, className]}>
+  {label}
   <slot />
 </Tag>

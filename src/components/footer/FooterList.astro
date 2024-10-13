@@ -1,5 +1,5 @@
 ---
-import Icon from '@components/common/Icon.astro';
+import Link from '@components/common/Link.astro';
 import Text from '@components/common/Text.astro';
 import type { IconType } from '@utils/schemas/icons';
 
@@ -19,41 +19,27 @@ const { title, items = [] } = Astro.props;
 
 <div>
   <Text
-    level='h3'
+    level='h4'
     themed
     class='mb-4'
-  >
-    {title}
-  </Text>
-  <ul class='space-y-2'>
+    label={title}
+  />
+  <ul class='space-y-4'>
     {
       items.map((item) => (
         <li>
           {item.url ? (
-            <a
+            <Link
               href={item.url}
-              class:list={[
-                {
-                  'flex items-center gap-2': item.icon,
-                },
-              ]}
-            >
-              {item.icon && (
-                <Icon
-                  name={item.icon}
-                  width={24}
-                  height={24}
-                />
-              )}
-              {item.label}
-            </a>
+              label={item.label}
+              icon={item.icon}
+            />
           ) : (
             <Text
-              level='small'
+              level='body'
               themed
-            >
-              {item.label}
-            </Text>
+              label={item.label}
+            />
           )}
         </li>
       ))
