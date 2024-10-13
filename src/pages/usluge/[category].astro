@@ -7,6 +7,7 @@ import { getContent } from '../../utils/contentLoader';
 import type { CategoryInfo } from '../../utils/images';
 import Text from '@components/common/Text.astro';
 import Section from '@components/common/Section.astro';
+import SecondaryPage from '@components/common/SecondaryPage.astro';
 
 export const prerender = true;
 
@@ -33,46 +34,26 @@ const categoryDescription =
   frontmatter.categories[category.slug]?.description || '';
 
 const breadcrumbItems = [
-  { label: 'Galerija', href: '/usluge' },
+  { label: 'Usluge', href: '/usluge' },
   { label: categoryTitle, href: `/usluge/${category.slug}` },
 ];
 ---
 
-<Layout
-  title={`${categoryTitle} | NoDesign`}
-  regularHeader
+<SecondaryPage
+  title={categoryTitle}
+  description={categoryDescription}
+  breadcrumbs={breadcrumbItems}
 >
-  <Section>
-    <Breadcrumb items={breadcrumbItems} />
-    <Text
-      level='h1'
-      color='primary'
-      class='mb-4'
-      >{categoryTitle}</Text
-    >
+  <div class='grid md:grid-cols-2 lg:grid-cols-3 gap-8'>
     {
-      categoryDescription && (
-        <Text
-          level='body'
-          color='dark'
-          class='mb-8'
-        >
-          {categoryDescription}
-        </Text>
-      )
+      category.projects.map((project) => (
+        <Thumbnail
+          image={project.coverImage}
+          title={project.name}
+          description={project.description}
+          link={`/usluge/${category.slug}/${project.slug}`}
+        />
+      ))
     }
-
-    <div class='grid md:grid-cols-2 lg:grid-cols-3 gap-8'>
-      {
-        category.projects.map((project) => (
-          <Thumbnail
-            image={project.coverImage}
-            title={project.name}
-            description={project.description}
-            link={`/usluge/${category.slug}/${project.slug}`}
-          />
-        ))
-      }
-    </div>
-  </Section>
-</Layout>
+  </div>
+</SecondaryPage>

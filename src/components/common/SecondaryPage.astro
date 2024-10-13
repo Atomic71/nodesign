@@ -1,0 +1,40 @@
+---
+import Breadcrumb from '@components/common/Breadcrumb.astro';
+import Text from '@components/common/Text.astro';
+import Layout from '@layouts/Layout.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  breadcrumbs: { label: string; href: string }[];
+}
+
+const { title, description, breadcrumbs } = Astro.props as Props;
+---
+
+<Layout
+  title={`${title} | NoDesign`}
+  regularHeader
+>
+  <div class='container pt-12 pb-8'>
+    <Breadcrumb items={breadcrumbs} />
+    <Text
+      level='h1'
+      color='primary'
+      class='mb-4'
+      >{title}</Text
+    >
+    {
+      description && (
+        <Text
+          level='body'
+          color='dark'
+          class='mb-8'
+        >
+          {description}
+        </Text>
+      )
+    }
+    <slot />
+  </div>
+</Layout>

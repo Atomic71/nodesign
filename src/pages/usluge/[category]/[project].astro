@@ -8,6 +8,7 @@ import { getContent } from '@utils/contentLoader';
 import type { CategoryInfo, ProjectInfo } from '@utils/images';
 import 'photoswipe/style.css';
 import { getCollection } from 'astro:content';
+import SecondaryPage from '@components/common/SecondaryPage.astro';
 
 export const prerender = true;
 
@@ -47,57 +48,37 @@ const breadcrumbItems = [
 ];
 ---
 
-<Layout
-  title={`${project.name} | ${category.name} | NoDesign`}
-  regularHeader
+<SecondaryPage
+  title={`${project.name}`}
+  description={project.description ?? ''}
+  breadcrumbs={breadcrumbItems}
 >
-  <Section>
-    <Breadcrumb items={breadcrumbItems} />
-    <Text
-      level='h1'
-      color='primary'
-      class='mb-4'
-      >{project.name}</Text
-    >
+  <div
+    class='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pswp-gallery'
+    id='gallery'
+  >
     {
-      project.description && (
-        <Text
-          level='body'
-          color='dark'
-          class='mt-4 mb-8'
+      project.images.map((image, index) => (
+        <a
+          href={image.src}
+          data-pswp-width={image.width}
+          data-pswp-height={image.height}
+          class='group relative overflow-hidden rounded-lg aspect-square cursor-pointer'
         >
-          {project.description}
-        </Text>
-      )
+          <img
+            src={image.thumbnail}
+            alt={image.alt}
+            class='object-cover w-full h-full transition-transform duration-300 group-hover:scale-105'
+            loading='lazy'
+          />
+          <div class='absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center'>
+            <span class='text-white text-lg font-semibold'>{image.alt}</span>
+          </div>
+        </a>
+      ))
     }
-
-    <div
-      class='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pswp-gallery'
-      id='gallery'
-    >
-      {
-        project.images.map((image, index) => (
-          <a
-            href={image.src}
-            data-pswp-width={image.width}
-            data-pswp-height={image.height}
-            class='group relative overflow-hidden rounded-lg aspect-square cursor-pointer'
-          >
-            <img
-              src={image.thumbnail}
-              alt={image.alt}
-              class='object-cover w-full h-full transition-transform duration-300 group-hover:scale-105'
-              loading='lazy'
-            />
-            <div class='absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center'>
-              <span class='text-white text-lg font-semibold'>{image.alt}</span>
-            </div>
-          </a>
-        ))
-      }
-    </div>
-  </Section>
-</Layout>
+  </div>
+</SecondaryPage>
 
 <script>
   import PhotoSwipeLightbox from 'photoswipe/lightbox';

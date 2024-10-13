@@ -1,9 +1,7 @@
 ---
-import { getCollection } from 'astro:content';
-import Layout from '@layouts/Layout.astro';
-import Section from '@components/common/Section.astro';
-import Text from '@components/common/Text.astro';
+import SecondaryPage from '@components/common/SecondaryPage.astro';
 import ServiceCard from '@components/common/ServiceCard.astro';
+import { getCollection } from 'astro:content';
 
 const services = await getCollection('services');
 const sortedServices = services.sort(
@@ -11,31 +9,24 @@ const sortedServices = services.sort(
 );
 ---
 
-<Layout
-  title='Naše Usluge | NoDesign'
-  regularHeader
+<SecondaryPage
+  title='Naše Usluge'
+  description='Otkrijte našu paletu usluga dizajniranih da transformiraju vaš prostor u nešto izvanredno.'
+  breadcrumbs={[
+    { label: 'Početna', href: '/' },
+    { label: 'Naše Usluge', href: '/usluge' },
+  ]}
 >
-  <Section title='Naše Usluge'>
-    <Text
-      level='body'
-      color='dark'
-      class='text-center mb-12'
-    >
-      Otkrijte našu paletu usluga dizajniranih da transformiraju vaš prostor u
-      nešto izvanredno.
-    </Text>
-
-    <div class='grid md:grid-cols-2 lg:grid-cols-3 gap-8'>
-      {
-        sortedServices.map((service) => (
-          <ServiceCard
-            title={service.data.title}
-            description={service.data.description}
-            icon={service.data.icon}
-            slug={service.slug}
-          />
-        ))
-      }
-    </div>
-  </Section>
-</Layout>
+  <div class='grid md:grid-cols-2 lg:grid-cols-3 gap-8'>
+    {
+      sortedServices.map((service) => (
+        <ServiceCard
+          title={service.data.title}
+          description={service.data.description}
+          icon={service.data.icon}
+          slug={service.slug}
+        />
+      ))
+    }
+  </div>
+</SecondaryPage>

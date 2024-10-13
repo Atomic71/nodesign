@@ -1,10 +1,7 @@
 ---
-import Layout from '@layouts/Layout.astro';
-import { getContent } from '@utils/contentLoader';
-import { Image } from 'astro:assets';
-import aboutBackground from '@assets/photos/kancelarija-2.jpg';
-import Text from '@components/common/Text.astro';
+import SecondaryPage from '@components/common/SecondaryPage.astro';
 import Section from '@components/common/Section.astro';
+import Text from '@components/common/Text.astro';
 import { getCollection } from 'astro:content';
 
 const aboutContent = await getCollection('about');
@@ -15,47 +12,29 @@ if (!aboutContent) {
 const aboutData = aboutContent[0];
 ---
 
-<Layout
+<SecondaryPage
   title={aboutData.data.title}
-  regularHeader
+  description={aboutData.data.description}
+  breadcrumbs={[
+    { label: 'Početna', href: '/' },
+    { label: 'O nama', href: '/o-nama' },
+  ]}
 >
-  <div
-    class='relative z-10 bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-lg p-6 md:p-8 w-full max-w-3xl'
+  <Text
+    level='h2'
+    themed
+    >{aboutData.data.mission.title}</Text
   >
-    <Text
-      level='h1'
-      themed
-      class='mb-6'
-      >{aboutData.data.title}</Text
-    >
+  <Text
+    level='body'
+    themed
+    >{aboutData.data.mission.description}</Text
+  >
+  <Text level='h2'> {aboutData.data.team.title}</Text>
 
-    <Text
-      level='body'
-      themed
-      class='mb-8'
-      set:html={aboutData.body}
-    />
-
-    <Section
-      title={aboutData.data.mission.title}
-      backgroundColor='bg-transparent'
-    >
-      <Text
-        level='body'
-        color='light'
-        >{aboutData.data.mission.description}</Text
-      >
-    </Section>
-
-    <Section
-      title={aboutData.data.team.title}
-      backgroundColor='bg-transparent'
-    >
-      <Text
-        level='body'
-        color='light'
-        >{aboutData.data.team.description}</Text
-      >
-    </Section>
-  </div>
-</Layout>
+  <Text
+    themed
+    level='body'
+    >{aboutData.data.team.description}</Text
+  >
+</SecondaryPage>
