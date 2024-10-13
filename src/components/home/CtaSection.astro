@@ -15,13 +15,20 @@ const { title, buttonText, link } = Astro.props;
   title={title}
   backgroundColor='bg-primary dark:bg-primary-dark'
   titleColor='light'
+  centerText
 >
   <div class='flex justify-center'>
     <a
       href={link}
-      class='bg-white dark:bg-background-dark hover:bg-neutral-100 dark:hover:bg-background-light text-primary dark:text-primary-light font-bold py-2 px-4 rounded transition duration-300'
+      class='btn font-bold py-2 px-4 rounded transition'
     >
       {buttonText}
     </a>
   </div>
 </Section>
+
+<style>
+  .btn {
+    @apply bg-accent-dark dark:bg-accent-light hover:bg-neutral-100 dark:hover:bg-background-light dark:hover:text-text-light text-primary dark:text-secondary-dark;
+  }
+</style>

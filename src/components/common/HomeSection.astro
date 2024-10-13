@@ -7,6 +7,7 @@ interface Props {
   titleColor?: 'primary' | 'secondary' | 'accent' | 'light' | 'dark';
   backgroundColor?: string;
   class?: string;
+  centerText?: boolean;
 }
 
 const {
@@ -15,20 +16,28 @@ const {
   titleColor = 'primary',
   backgroundColor = 'bg-background-light dark:bg-background-dark',
   class: className,
+  centerText = false,
 } = Astro.props;
 ---
 
-<section class:list={[backgroundColor, 'py-16', className, 'container']}>
-  {
-    title && (
-      <Text
-        level={titleLevel}
-        themed
-        class='mb-8'
-      >
-        {title}
-      </Text>
-    )
-  }
+<section class:list={[backgroundColor, 'py-16', className]}>
+  <div class='container'>
+    {
+      title && (
+        <Text
+          level={titleLevel}
+          themed
+          class:list={[
+            'mb-8',
+            {
+              'text-center': centerText,
+            },
+          ]}
+        >
+          {title}
+        </Text>
+      )
+    }
+  </div>
   <slot />
 </section>

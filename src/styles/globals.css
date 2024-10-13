@@ -4,5 +4,5 @@
 
 
 a {
-    @apply text-text-light dark:text-text-dark hover:text-primary-dark dark:hover:text-primary-light transition-colors;
+    @apply text-text-light dark:text-text-dark hover:text-primary-dark dark:hover:text-primary-light transition-all duration-300;
 }
